@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import { format, formatValue, getAttrs, formatAmount, filterObjProps } from './util'
+import Provider from '../context'
 
 /**
  * 自定义属性全小写；原声属性驼峰法
@@ -79,7 +80,7 @@ class Input extends Component {
    */
   renderText () {
     let { hover, active, value } = this.state
-    let { disabled, type, id, placeholder, clearable } = this.props
+    let { disabled, type, id, placeholder, clearable, theme } = this.props
     let { prefix, suffix, prepend, append } = this.state
 
     const noClear = ['textarea']
@@ -92,7 +93,8 @@ class Input extends Component {
         className={classNames('hi-input__out', {
           'hi-input--prepend': prepend,
           'hi-input--append': append
-        })}
+        },
+        `theme__${theme}`)}
       >
         {// 前置元素
           prepend && <span className='hi-input__prepend'>{prepend}</span>}
@@ -217,71 +219,73 @@ class Input extends Component {
    */
   renderTextarea () {
     let { active } = this.state
-    let { disabled } = this.props
+    let { disabled, theme } = this.props
     const { defaultValue, ...attrs } = this.attrs
     const filterAttrs = filterObjProps(attrs, ['locale', 'theme', 'suffixicon', 'suffix', 'prepend', 'prefixicon', 'prefix', 'localeDatas', 'append'])
 
     return (
-      <textarea
-        className={`hi-input ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
-        style={this.props.style}
-        autoComplete='off'
-        value={this.state.value}
-        disabled={disabled}
-        {...filterAttrs}
-        onChange={e => {
-          e.persist()
-          let valueTrue = e.target.value
-          this.props.onChange && this.props.onChange(e, valueTrue)
-          this.props.value === undefined && this.setState({ value: valueTrue, valueTrue })
-        }}
-        onBlur={e => {
-          e.persist()
-          let valueTrue = e.target.value
+      <div className={`theme__${theme}`}>
+        <textarea
+          className={`hi-input ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
+          style={this.props.style}
+          autoComplete='off'
+          value={this.state.value}
+          disabled={disabled}
+          {...filterAttrs}
+          onChange={e => {
+            e.persist()
+            let valueTrue = e.target.value
+            this.props.onChange && this.props.onChange(e, valueTrue)
+            this.props.value === undefined && this.setState({ value: valueTrue, valueTrue })
+          }}
+          onBlur={e => {
+            e.persist()
+            let valueTrue = e.target.value
 
-          this.setState({ active: false }, () => {
-            this.props.onBlur && this.props.onBlur(e, valueTrue)
-          })
-        }}
-        onFocus={e => {
-          e.persist()
-          const valueTrue = e.target.value
+            this.setState({ active: false }, () => {
+              this.props.onBlur && this.props.onBlur(e, valueTrue)
+            })
+          }}
+          onFocus={e => {
+            e.persist()
+            const valueTrue = e.target.value
 
-          this.setState({ active: true }, () => {
-            this.props.onFocus && this.props.onFocus(e, valueTrue)
-          })
-        }}
-        onKeyDown={e => {
-          const valueTrue = e.target.value
+            this.setState({ active: true }, () => {
+              this.props.onFocus && this.props.onFocus(e, valueTrue)
+            })
+          }}
+          onKeyDown={e => {
+            const valueTrue = e.target.value
 
-          this.props.onKeyDown && this.props.onKeyDown(e, valueTrue)
-        }}
-        onKeyUp={e => {
-          const valueTrue = e.target.value
+            this.props.onKeyDown && this.props.onKeyDown(e, valueTrue)
+          }}
+          onKeyUp={e => {
+            const valueTrue = e.target.value
 
-          this.props.onKeyUp && this.props.onKeyUp(e, valueTrue)
-        }}
-        onKeyPress={e => {
-          const valueTrue = e.target.value
+            this.props.onKeyUp && this.props.onKeyUp(e, valueTrue)
+          }}
+          onKeyPress={e => {
+            const valueTrue = e.target.value
 
-          this.props.onKeyPress && this.props.onKeyPress(e, valueTrue)
-        }}
-        onInput={e => {
-          const valueTrue = e.target.value
+            this.props.onKeyPress && this.props.onKeyPress(e, valueTrue)
+          }}
+          onInput={e => {
+            const valueTrue = e.target.value
 
-          this.props.onInput && this.props.onInput(e, valueTrue)
-        }}
-        onMouseOver={e => {
-          this.setState({
-            hover: true
-          })
-        }}
-        onMouseLeave={e => {
-          this.setState({
-            hover: false
-          })
-        }}
-      />
+            this.props.onInput && this.props.onInput(e, valueTrue)
+          }}
+          onMouseOver={e => {
+            this.setState({
+              hover: true
+            })
+          }}
+          onMouseLeave={e => {
+            this.setState({
+              hover: false
+            })
+          }}
+        />
+      </div>
     )
   }
 
@@ -320,4 +324,4 @@ Input.defaultProps = {
   defaultValue: ''
 }
 
-export default Input
+export default Provider(Input)
