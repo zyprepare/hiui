@@ -62,6 +62,9 @@ export default {
       tag: components['tag'],
       badge: components['badge'],
       loading: components['loading']
+    },
+    'testing': {
+      'hi-table': components['hi-table']
     }
   }
 }

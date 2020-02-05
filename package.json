@@ -80,6 +80,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/standalone": "^7.4.5",
     "@bougiel/puppeteer-prerenderer": "^0.0.3",
+    "@hi-ui/hi-table": "^1.0.0-alpha",
     "@mdx-js/loader": "^1.1.0",
     "autoprefixer": "^8.5.0",
     "babel-eslint": "^8.2.6",
