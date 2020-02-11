@@ -1,0 +1,21 @@
+# MIFE dotfiles
+
+# Output files
+dist/
+es/
+
+test/coverage/
+# Dev dependencies and cache files
+node_modules/
+build/
+gulpfiles.js
+# Misc files
+*~
+~*
+._*
+.DS_Store
+Desktop.ini
+Thumbs.db
+.Spotlight-V100
+.Trashes
+.eslintrc.json
