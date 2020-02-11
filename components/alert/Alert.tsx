@@ -3,58 +3,71 @@ import classNames from 'classnames'
 import './style/index'
 
 class Alert extends React.Component<AlertProps,AlertState>  {
-  state = { visible: true }
+  timeoutId :number
+  
   static defaultProps = {
     prefixCls: 'hi-alert',
     type: 'info',
     closeable: true,
     duration: null
   }
-  timeoutId :number
+
+  constructor (props) {
+    super(props)
+    this.state = { visible: true }
+  }
+
   componentDidMount () {
-    if (this.props.duration !== null) {
+    const { duration } = this.props
+    if (duration !== null) {
     this.timeoutId = window.setTimeout(() => {
         this.handleClose()
-      }, this.props.duration)
+      }, duration)
     }
   }
+
   componentWillUnmount () {
     clearTimeout(this.timeoutId)
   }
-  handleClose () {
-    this.setState({ visible: false })
-    this.props.onClose && this.props.onClose()
-  }
-  render () {
-    let classnames = classNames(this.props.prefixCls, this.state.visible, this.props.type, {
-      noTitle: !this.props.title
-    })
-    let _type :string = 'tishi'
 
-    switch (this.props.type) {
+  handleClose = (): void => {
+    const { onClose } = this.props
+    this.setState({ visible: false })
+    onClose()
+  }
+
+  render () {
+    const { prefixCls, title, type, content, closeable } = this.props 
+    const { visible } = this.state 
+    const classnames = classNames(prefixCls, visible, type, {
+      noTitle: !title
+    })
+    let typeIcon  = 'tishi'
+
+    switch (type) {
       case 'warning':
-        _type = 'jinggao'
+        typeIcon = 'jinggao'
         break
       case 'error':
-        _type = 'shibai'
+        typeIcon = 'shibai'
         break
       case 'success':
-        _type = 'chenggong'
+        typeIcon = 'chenggong'
         break
       default:
-        _type = 'tishi'
+        typeIcon = 'tishi'
     }
 
     return (
-      this.state.visible && (
+      visible && (
         <div className={classnames}>
           <div className='hi-icon__title'>
-            <i className={`hi-icon icon-${_type}`} />
-            {this.props.title && <div className='text-title'>{this.props.title}</div>}
+            <i className={`hi-icon icon-${typeIcon}`} />
+            {title && <div className='text-title'>{title}</div>}
           </div>
-          {this.props.content && <div className='text-message'>{this.props.content}</div>}
-          {this.props.closeable && (
-            <div className='close-btn icon-img-delete' onClick={this.handleClose.bind(this)}>
+          {content && <div className='text-message'>{content}</div>}
+          {closeable && (
+            <div className='close-btn icon-img-delete' onClick={this.handleClose}>
               <i className='hi-icon icon-close' />
             </div>
           )}

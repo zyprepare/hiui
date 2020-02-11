@@ -22,9 +22,7 @@ module.exports = {
   },
   rules: {
     semi: [0],
-    'comma-dangle': [0],
-    'react/jsx-one-expression-per-line': [0],
-    'react/static-property-placement': [0]
+    'comma-dangle': [0]
   },
   overrides: [
     {
@@ -38,7 +36,13 @@ module.exports = {
       ],
       rules: {
         'react/static-property-placement': [0],
-        'react/jsx-filename-extension': [0]
+        'react/jsx-filename-extension': [0],
+        'no-unused-expressions': 'off',
+        'jsx-a11y/no-static-element-interactions': 'off',
+        'jsx-a11y/anchor-has-content': 0,
+        'jsx-a11y/click-events-have-key-events': 'off',
+        'jsx-a11y/anchor-is-valid': 'off',
+        'jsx-a11y/no-noninteractive-element-interactions': 'off'
       }
     }
   ]
