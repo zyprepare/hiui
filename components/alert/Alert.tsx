@@ -77,7 +77,7 @@ class Alert extends React.Component<AlertProps,AlertState>  {
   }
 }
 
-export interface AlertProps {
+interface AlertProps {
     type ?: 'info' | 'error' |  'success' | 'warning';
     onClose ?: () => void;
     content ?: React.ReactNode;
@@ -86,7 +86,7 @@ export interface AlertProps {
     duration ?: number | null;
     prefixCls ?: 'hi-alert';
 }
-export interface AlertState {
+interface AlertState {
     visible : boolean
 }
 
