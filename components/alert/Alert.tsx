@@ -85,6 +85,7 @@ interface AlertProps {
     closeable ?: boolean;
     duration ?: number | null;
     prefixCls ?: 'hi-alert';
+    theme ?: string;
 }
 interface AlertState {
     visible : boolean
