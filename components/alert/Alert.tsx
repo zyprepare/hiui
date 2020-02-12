@@ -33,7 +33,7 @@ class Alert extends React.Component<AlertProps,AlertState>  {
   handleClose = (): void => {
     const { onClose } = this.props
     this.setState({ visible: false })
-    onClose()
+    onClose && onClose()
   }
 
   render () {

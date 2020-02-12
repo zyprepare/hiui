@@ -1,3 +1,4 @@
+const { defaults: tsjPreset } = require('ts-jest/presets')
 module.exports = {
   // Stop running tests after the first failure
   bail: false,
@@ -15,25 +16,25 @@ module.exports = {
   coverageReporters: ['json-summary', 'text', 'lcov'],
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: [
-    '<rootDir>/components/**/*',
-    '!<rootDir>/components/table/**/*',
-    '!<rootDir>/components/nav-menu/**/*',
-    '!<rootDir>/components/**/style/**/*',
-    '!<rootDir>/components/**/__test__/**/*',
-    '!<rootDir>/components/**/(*-legacy)/**/*'
-  ],
-  // 本地单测使用
-  // 1. 修改范围 <rootDir>/components/[组件名称]/**/*
-  // 2. 运行单测命令 npx jest components/date-picker/__tests__/index.test.js --coverage 即可看到当前文件夹的覆盖率
   // collectCoverageFrom: [
-  //   '<rootDir>/components/select/**/*',
+  //   '<rootDir>/components/**/*',
   //   '!<rootDir>/components/table/**/*',
   //   '!<rootDir>/components/nav-menu/**/*',
   //   '!<rootDir>/components/**/style/**/*',
   //   '!<rootDir>/components/**/__test__/**/*',
   //   '!<rootDir>/components/**/(*-legacy)/**/*'
   // ],
+  // 本地单测使用
+  // 1. 修改范围 <rootDir>/components/[组件名称]/**/*
+  // 2. 运行单测命令 npx jest components/date-picker/__tests__/index.test.js --coverage 即可看到当前文件夹的覆盖率
+  collectCoverageFrom: [
+    '<rootDir>/components/alert/**/*',
+    '!<rootDir>/components/table/**/*',
+    '!<rootDir>/components/nav-menu/**/*',
+    '!<rootDir>/components/**/style/**/*',
+    '!<rootDir>/components/**/__test__/**/*',
+    '!<rootDir>/components/**/(*-legacy)/**/*'
+  ],
 
   // The test environment that will be used for testing
   testEnvironment: 'jest-environment-jsdom-global',
@@ -56,7 +57,8 @@ module.exports = {
 
   // A map from regular expressions to paths to transformers
   transform: {
-    '^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest'
+    '^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
+    ...tsjPreset.transform
   },
 
   // The regexp pattern Jest uses to detect test files
