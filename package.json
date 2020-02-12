@@ -16,7 +16,8 @@
     "dev": "npm start",
     "start": "node build/start.js",
     "prerender:gh-pages": "cross-env DOC_ENV=github npm run build && cross-env DOC_ENV=github node build/prerenderSite.js",
-    "prerender": "npm run build && node build/prerenderSite.js"
+    "prerender": "npm run build && node build/prerenderSite.js",
+    "eslint":"node_modules/.bin/eslint --fix ./components/**/*.tsx"
   },
   "repository": {
     "type": "git",
