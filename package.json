@@ -177,12 +177,7 @@
       "yarn.lock"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit",
-      "commit-msg": "commitlint -e $GIT_PARAMS"
-    }
-  },
+  
   "lint-staged": {
     "*.{js,jsx}": [
       "node_modules/.bin/standard --fix",

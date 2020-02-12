@@ -2,8 +2,8 @@ import * as React from 'react';
 import classNames from 'classnames'
 import './style/index'
 
-class Alert extends React.Component<AlertProps,AlertState>  {
-  timeoutId :number
+class Alert extends React.Component< AlertProps, AlertState >  {
+  timeoutId  = 0
   
   static defaultProps = {
     prefixCls: 'hi-alert',
@@ -12,7 +12,7 @@ class Alert extends React.Component<AlertProps,AlertState>  {
     duration: null
   }
 
-  constructor (props) {
+  constructor (props :AlertProps) {
     super(props)
     this.state = { visible: true }
   }
@@ -84,7 +84,7 @@ interface AlertProps {
     title ?: React.ReactNode;
     closeable ?: boolean;
     duration ?: number | null;
-    prefixCls ?: 'hi-alert';
+    prefixCls ?: string;
     theme ?: string;
 }
 interface AlertState {
