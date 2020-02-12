@@ -9,6 +9,9 @@ test/coverage/
 node_modules/
 build/
 gulpfiles.js
+# exclude specific files
+*.js
+*.jsx
 # Misc files
 *~
 ~*

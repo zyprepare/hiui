@@ -36,7 +36,7 @@ module.exports = {
       ],
       rules: {
         'react/static-property-placement': [0],
-        'react/jsx-filename-extension': [0],
+        'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
         'no-unused-expressions': 'off',
         'jsx-a11y/no-static-element-interactions': 'off',
         'jsx-a11y/anchor-has-content': 0,
