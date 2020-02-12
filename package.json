@@ -180,6 +180,7 @@
   "lint-staged": {
     "*.{js,jsx}": [
       "node_modules/.bin/standard --fix",
+      "node_modules/.bin/eslint --fix ./components/**/*.tsx",
       "git add"
     ],
     "*.scss": [
