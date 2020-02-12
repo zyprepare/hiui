@@ -177,9 +177,19 @@
       "yarn.lock"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit",
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
+  },
   "lint-staged": {
     "*.{js,jsx}": [
-      "node_modules/.bin/standard --fix && node_modules/.bin/eslint --fix ./components/**/*.tsx",
+      "node_modules/.bin/standard --fix",
+      "git add"
+    ],
+    "*.{ts,tsx}": [
+      "node_modules/.bin/eslint --fix ./components/**/*.tsx",
       "git add"
     ],
     "*.scss": [
