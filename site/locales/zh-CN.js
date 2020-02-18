@@ -33,6 +33,7 @@ module.exports = {
     upload: 'Upload 上传',
     tree: 'Tree 树形控件',
     input: 'Input 输入框',
+    search: 'Search 搜索',
     'date-picker': 'DatePicker 日期选择器',
     'time-picker': 'TimePicker 时间选择器',
     counter: 'Counter 加减器',

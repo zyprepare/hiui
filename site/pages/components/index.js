@@ -30,6 +30,7 @@ export default {
     'group-form': {
       form: components['form'],
       input: components['input'],
+      search: components['search'],
       counter: components['counter'],
       select: components['select'],
       cascader: components['cascader'],

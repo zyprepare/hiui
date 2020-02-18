@@ -30,6 +30,7 @@ module.exports = {
     upload: 'Upload',
     tree: 'Tree',
     input: 'Input',
+    search: 'Search',
     'date-picker': 'Date Picker',
     'time-picker': 'Time Picker',
     counter: 'Counter',
