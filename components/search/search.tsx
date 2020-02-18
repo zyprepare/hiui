@@ -1,14 +1,18 @@
-import React from 'react'
+import React, {useState,useRef} from 'react'
 import Input from '../input'
 import Button from '../button'
+import Popper from '../popper'
 
-// import classNames from 'classnames'
 const Search = (props:SearchProps) => {
+    const [dropdownShow, setdropdownShow] = useState(false)
+    const searchInputContainer:any = useRef();
+    
     const { 
         onChange,
         OnSearch,
         placeholder,
-        width = 240
+        width = 240,
+        prepend = null
     } = props
 
     const prefixCls = 'hi-search'
@@ -17,17 +21,35 @@ const Search = (props:SearchProps) => {
       }} />
     return (
         <div className = {prefixCls}>
-            <Input
-                
-                type="text"
-                style={{ width }}
-                placeholder= { placeholder }
-                append = {append}
-                onChange = {(e)=>{
-                    const {value} = e.target
-                    onChange && onChange(value)
-                }}
-            />
+            <div className = {`${prefixCls}_input`} ref={searchInputContainer}>
+                <Input
+                    type="text"
+                    style={{ width }}
+                    placeholder= { placeholder }
+                    append = {append}
+                    prepend = {prepend}
+                    onChange = {(e)=>{
+                        const {value} = e.target
+                        setdropdownShow(true)
+                        value.length>0 ? setdropdownShow(true) : setdropdownShow(false)
+                        onChange && onChange(value)
+                    }}
+                />
+            </div>
+            
+           <Popper
+                show={dropdownShow}
+                attachEle={searchInputContainer.current}
+                zIndex={1050}
+                topGap={5}
+                className={`${prefixCls}__popper`}
+                placement="top-bottom-start"
+                >
+                <div>
+                    下拉框
+                </div>
+            </Popper>
+            
         </div>
     )
 }
