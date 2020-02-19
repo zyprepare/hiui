@@ -3,7 +3,7 @@ import Input from '../input'
 import Button from '../button'
 import SearchDropdown from './searchDropdown'
 import Popper from '../popper'
-import {DataSourceItem} from './types'
+import {DataSourceItem,SearchProps} from './types'
 import './style'
 
 const Search = (props:SearchProps) => {
@@ -16,9 +16,9 @@ const Search = (props:SearchProps) => {
         onSearch,
         style,
         placeholder,
-        width = 240,
-        prepend = null,
+        prepend,
         OnMore,
+        disabled,
         historyDataSource,
         dataSource
     } = props
@@ -51,7 +51,8 @@ const Search = (props:SearchProps) => {
                 <Input
                     type="text"
                     value={inputVal}
-                    style={{ width }}
+                    style ={style}
+                    disabled = {disabled}
                     placeholder= { placeholder }
                     clearable="true"
                     append = {append}
@@ -90,19 +91,6 @@ const Search = (props:SearchProps) => {
         </div>
     )
 }
-interface SearchProps {
-    onChange ?: (param: string) => void;
-    onSearch ?: (param: string,item?:DataSourceItem) => void;
-    width ?: number;
-    placeholder ?: string;
-    loading ?: boolean;
-    dataSource ?: Array<DataSourceItem>; // 如果有值就展示
-    onPressEnter ?: any;
-    prepend ?: JSX.Element;
-    style ?: any;
-    historyDataSource ?: Array<DataSourceItem>;  // 如果有值就展示；
-    onDelete ?: () => void;
-    OnMore ?: () => void; // 查看更多
-}
+
 
 export default Search

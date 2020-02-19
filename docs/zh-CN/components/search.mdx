@@ -13,23 +13,28 @@ import DemoState from '../../demo/search/section-base.jsx'
 
 <DemoState />
 
+## 关键词联想法
+import DemoRelation from '../../demo/search/section-relation.jsx'
+
+<DemoRelation />
 
 ## Props
 
 | 参数         | 说明               | 类型                | 可选值                                                                 | 默认值 |
 | ------------ | ------------------ | ------------------- | ---------------------------------------------------------------------- | ------ |
-| value        | 设置输入框的值     | string              | -                                                                      | -      |
-| defaultValue | 设置输入框的默认值 | string              | -                                                                      | -      |
-| type         | 设置输入框类型     | string              | 'text' \| 'textarea' \| 'id' \| 'tel' \| 'card' \| 'amount' \| 'email' | 'text' |
 | prepend       | 输入框前置内容     | string \| ReactNode | -                                                                      | -      |
-| append       | 输入框后置内容     | string \| ReactNode | -                                                                      | -      |
 | disabled     | 是否禁用           | boolean             | true \| false                                                          | false  |
-| clearable     | 是否可清空           | boolean          | true \| false                                                          | false  |
 | placeholder  | 输入框占位符       | string \| ReactNode | -                                                                      | -      |
-| onFocus      | 获得焦点时的回调   | (e: Event) => void  | -                                                                      | -      |
-| onBlur       | 失去焦点时的回调   | (e: Event) => void  | -                                                                      | -      |
-| onKeyDown    | 键盘按下时的回调   | (e: Event) => void  | -                                                                      | -      |
-| onKeyPress   | 字符键按下时的回调 | (e: Event) => void  | -                                                                      | -      |
-| onInput      | 输入字符时的回调   | (e: Event) => void  | -                                                                      | -      |
+| historyDataSource  | 显示搜索历史的数据    | `Array<DataSourceItem>` | -                                                           | -      |
+| dataSource    | 搜索结果的数据      | `Array<DataSourceItem>` | -                                                           | -      |
 | onChange     | 值改变时的回调     | (e: Event) => void  | -                                                                      | -      |
-| onKeyUp      | 键盘弹起时的回调   | (e: Event) => void  | -                                                                      | -      |
+| onSearch     | 当点击搜索按钮时候或者点击模糊匹配的选项时     | (inputVal: string, item ?:DataSourceItem) => void                    | -                                                                      | -      |
+| onDelete     | 点击搜索记录删除按钮时的回调  | () => void                    | -                                                                      | -      |
+| OnMore       | 点击查看更多的回调  | () => void                    | -                                                                      | -      |
+
+## DataSourceItem
+ 参数         | 说明               | 类型                | 可选值                                                                 | 默认值 |
+| ------------ | ------------------ | ------------------- | ---------------------------------------------------------------------- | ------ |
+| value     | 参数    | string \| number     | -                                                                      | -      |
+| text     | 显示的内容；如果存在children;就是这个类别的title | string \| ReactNode  | -                                                                      | -      |
+| children     | 分组内容  | `Array<DataSourceItem>`     | -                                                                      | -      |

@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import Icon from '../icon'
-import {DataSourceItem} from './types'
+import {DataSourceItem,SearchDropdownPorps} from './types'
 
 const SearchDropdown = (props: SearchDropdownPorps) => {
     const {
@@ -91,15 +91,6 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
     )
 }
 
-interface SearchDropdownPorps {
-    width ?: number;
-    dataSource ?: Array<DataSourceItem>;
-    prefixCls ?: string;
-    itemClick ?: any;          
-    inputVal : string;
-    onDelete ?: () => void;
-    historyDataSource ?:Array<DataSourceItem>;
-    OnMore ?: () => void
-}
+
 
 export default SearchDropdown

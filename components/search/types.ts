@@ -3,3 +3,25 @@ export interface DataSourceItem {
     text: any;
     children ?:Array<DataSourceItem> 
 }
+export interface SearchDropdownPorps {
+    width ?: number;
+    dataSource ?: Array<DataSourceItem>;
+    prefixCls ?: string;
+    itemClick ?: any;          
+    inputVal : string;
+    onDelete ?: () => void;
+    historyDataSource ?:Array<DataSourceItem>;
+    OnMore ?: () => void;
+}
+export interface SearchProps {
+    prepend ?: JSX.Element;
+    disabled ?: boolean
+    placeholder ?: string;
+    historyDataSource ?: Array<DataSourceItem>;  // 如果有值就展示；
+    dataSource ?: Array<DataSourceItem>; // 如果有值就展示
+    onChange ?: (param: string) => void;
+    onSearch ?: (param: string,item?:DataSourceItem) => void;
+    onDelete ?: () => void;
+    OnMore ?: () => void; // 查看更多
+    style ?: any;
+}
