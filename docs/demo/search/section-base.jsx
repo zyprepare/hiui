@@ -12,7 +12,7 @@ const code = [
       render() {
         return (
           <Search 
-            style={{ width: 250 }}
+            style={{ width: 260 }}
             placeholder='搜索关键字'
             onSearch = {(value) => {
               console.log('输入框中的关键字', value)

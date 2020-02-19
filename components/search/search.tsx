@@ -20,7 +20,8 @@ const Search = (props:SearchProps) => {
         OnMore,
         disabled,
         historyDataSource,
-        dataSource
+        dataSource,
+        onDelete
     } = props
     const closeDropdown = (e) => {
         setdropdownShow(e.target.className === 'hi-input__text ' && !byButtonTarget)
@@ -34,6 +35,7 @@ const Search = (props:SearchProps) => {
             document.removeEventListener('click', closeDropdown)
         }
     })
+    
     const itemClick = (value,item :DataSourceItem) => {
         setinputVal(value)
         setdropdownShow(false)
@@ -83,6 +85,7 @@ const Search = (props:SearchProps) => {
                             itemClick = {itemClick}
                             dataSource = {dataSource}
                             OnMore = {OnMore}
+                            onDelete = {onDelete}
                             historyDataSource = {historyDataSource}
                         /> : null
                     }

@@ -9,10 +9,32 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
         prefixCls,
         itemClick,
         historyDataSource,
-        inputVal,
+        inputVal = '',
         onDelete,
         OnMore
     } = props
+    const hightlightKeyword = (text, uniqueKey) => {
+        const searchbarValue = inputVal
+        let keyword = inputVal
+        keyword = searchbarValue.includes('[') ? keyword.replace(/\[/gi, '\\[') : keyword
+        keyword = searchbarValue.includes('(') ? keyword.replace(/\(/gi, '\\(') : keyword
+        keyword = searchbarValue.includes(')') ? keyword.replace(/\)/gi, '\\)') : keyword
+    
+        const parts = text.split(new RegExp(`(${keyword})`, 'gi'))
+        return (
+            inputVal && inputVal.length > 0 ? <p key={uniqueKey}>
+            { parts.map((part) =>
+              part === searchbarValue
+                ? <span key={uniqueKey} className='hi-search_dropdown--item__name-hightlight'>
+                   { part }
+                </span>
+                : part
+            )
+            }
+          </p>
+            : text
+        )
+    }
     const ItemChildren = (item: DataSourceItem) => {
         return (
             <ul>{
@@ -24,7 +46,7 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
                                 itemClick(ele.text,ele)
                             }}
                         >
-                            {ele.text}
+                            {hightlightKeyword(ele.text,ele.value)}
                         </span>
                     </li>
                 }) : null
@@ -32,6 +54,7 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
             </ul>
         )
     }
+    
     const DataSourceRender = (item:DataSourceItem) => {
         const className = classNames(
             `${prefixCls}_dropdown--item_normal`,
@@ -48,7 +71,7 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
                         itemClick(item.text,item)
                     }}
                 >
-                    {item.text}
+                    {hightlightKeyword(item.text,item.value)}
                 </span>
                 {
                     item.children && ItemChildren(item)
@@ -56,11 +79,13 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
             </li>
         )
     }
+    
     const HistoryRender = () => {
         const HistoryTitle = inputVal.length === 0 && historyDataSource && historyDataSource.length > 0 ? 
                             <li className={`${prefixCls}_dropdown--item ${prefixCls}_dropdown--item-history`}>
                                 <span>搜索历史</span>
                                 <Icon name='delete' onClick={()=>{
+
                                     onDelete && onDelete()
                                 }}/>
                             </li> : null
@@ -71,8 +96,11 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
 
         )
     }
+    
     const data = inputVal.length ? dataSource : historyDataSource
+    console.log('historyDataSource',historyDataSource)
     return (
+        
         <div className ={`${prefixCls}_dropdown`}>
              <ul className ={`${prefixCls}_dropdown--items`} style={{height: OnMore ? 224 : 260}}>
                 { HistoryRender() }
@@ -80,6 +108,9 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
                     data && data.map((item)=>{
                         return DataSourceRender(item)
                     })
+                }
+                {
+                    (!dataSource || dataSource.length === 0) && <li className={`${prefixCls}_dropdown--item-nodata`}> 暂无数据 </li>
                 }
             </ul>
             {
