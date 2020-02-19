@@ -1,37 +1,68 @@
-import React, {useState,useRef} from 'react'
+import React, {useState,useRef,useEffect} from 'react'
 import Input from '../input'
 import Button from '../button'
+import SearchDropdown from './searchDropdown'
 import Popper from '../popper'
+import {DataSourceItem} from './types'
+import './style'
 
 const Search = (props:SearchProps) => {
     const [dropdownShow, setdropdownShow] = useState(false)
-    const searchInputContainer:any = useRef();
-    
+    const searchInputContainer:any = useRef()
+    const [inputVal,setinputVal] = useState('')
+    const [byButtonTarget,setbyButtonTarget] = useState(false)
     const { 
         onChange,
-        OnSearch,
+        onSearch,
+        style,
         placeholder,
         width = 240,
-        prepend = null
+        prepend = null,
+        OnMore,
+        historyDataSource,
+        dataSource
     } = props
-
+    const closeDropdown = (e) => {
+        setdropdownShow(e.target.className === 'hi-input__text ' && !byButtonTarget)
+        if(e.target.className !== 'hi-icon icon-search') {
+            setbyButtonTarget (false)
+        }   
+    }
+    useEffect(()=>{
+        document.addEventListener('click', closeDropdown)
+        return () => {
+            document.removeEventListener('click', closeDropdown)
+        }
+    })
+    const itemClick = (value,item :DataSourceItem) => {
+        setinputVal(value)
+        setdropdownShow(false)
+        onSearch && onSearch(value,item)
+    } 
     const prefixCls = 'hi-search'
-    const append = <Button type="default" icon='search' onClick={() => {
-        OnSearch && OnSearch()
+    const append = <Button type="default" icon='search' onClick={(e) => {
+        setbyButtonTarget(true)
+        closeDropdown(e)
+        onSearch && onSearch(inputVal)
       }} />
     return (
-        <div className = {prefixCls}>
+        <div className = {prefixCls} style={style}>
             <div className = {`${prefixCls}_input`} ref={searchInputContainer}>
                 <Input
                     type="text"
+                    value={inputVal}
                     style={{ width }}
                     placeholder= { placeholder }
+                    clearable="true"
                     append = {append}
                     prepend = {prepend}
+                    onFocus = {(e)=>{
+                        historyDataSource && closeDropdown(e)
+                    }}
                     onChange = {(e)=>{
                         const {value} = e.target
-                        setdropdownShow(true)
-                        value.length>0 ? setdropdownShow(true) : setdropdownShow(false)
+                        setinputVal(value)
+                        dataSource && value.length>0 && setdropdownShow(true)
                         onChange && onChange(value)
                     }}
                 />
@@ -44,23 +75,34 @@ const Search = (props:SearchProps) => {
                 topGap={5}
                 className={`${prefixCls}__popper`}
                 placement="top-bottom-start"
-                >
-                <div>
-                    下拉框
-                </div>
+                > 
+                    { dataSource || historyDataSource ? <SearchDropdown  
+                            prefixCls = {prefixCls} 
+                            inputVal = {inputVal}
+                            itemClick = {itemClick}
+                            dataSource = {dataSource}
+                            OnMore = {OnMore}
+                            historyDataSource = {historyDataSource}
+                        /> : null
+                    }
             </Popper>
             
         </div>
     )
 }
 interface SearchProps {
-    onChange ?: any;
-    OnSearch ?: any;
+    onChange ?: (param: string) => void;
+    onSearch ?: (param: string,item?:DataSourceItem) => void;
     width ?: number;
     placeholder ?: string;
     loading ?: boolean;
-    dataSouse ?: Array<any>; 
+    dataSource ?: Array<DataSourceItem>; // 如果有值就展示
     onPressEnter ?: any;
     prepend ?: JSX.Element;
+    style ?: any;
+    historyDataSource ?: Array<DataSourceItem>;  // 如果有值就展示；
+    onDelete ?: () => void;
+    OnMore ?: () => void; // 查看更多
 }
+
 export default Search
