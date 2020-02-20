@@ -116,5 +116,10 @@ export default {
     searchEmptyResult: 'No serach results',
     modalTitle: 'Warning',
     delTips: 'Deleting a node will delete all child nodes, are you sure to delete this node?'
+  },
+  search: {
+    searchEmptyResult: 'No serach results',
+    searchEmptyRecord: 'No serach record',
+    searchRecord: 'Serach record'
   }
 }

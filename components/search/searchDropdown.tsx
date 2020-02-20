@@ -15,7 +15,8 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
         dropdownShow,
         searchInputContainer,
         onMouseLeave,
-        onMouseEnter
+        onMouseEnter,
+        localeDatas
     } = props
     const hightlightKeyword = (text, uniqueKey):React.ReactNode => {
         const searchbarValue = inputVal
@@ -85,15 +86,16 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
     }
     
     const HistoryRender = ():React.ReactNode => {
+        const {searchRecord, searchEmptyRecord} = localeDatas.search
         const HistoryTitle = inputVal.length === 0 && historyDataSource && historyDataSource.length > 0 ? 
                             <li className={`${prefixCls}_dropdown--item ${prefixCls}_dropdown--item-history`}>
-                                <span>搜索历史</span>
+                                <span>{searchRecord}</span>
                                 <Icon name='delete' onClick={()=>{
 
                                     onDelete && onDelete()
                                 }}/>
                             </li> : null
-        const HistoryNoData = <li className={`${prefixCls}_dropdown--item-nodata`}> 无搜索记录 </li>
+        const HistoryNoData = <li className={`${prefixCls}_dropdown--item-nodata`}> {searchEmptyRecord} </li>
         const showHistoryNode = inputVal.length === 0 && historyDataSource && historyDataSource.length === 0
         return (
             showHistoryNode ? HistoryNoData : HistoryTitle
@@ -102,6 +104,7 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
     }
     
     const data = inputVal.length ? dataSource : historyDataSource
+    const {searchEmptyResult} = localeDatas.search
     return (
         <Popper
             show={dropdownShow}
@@ -125,7 +128,7 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
                         })
                     }
                     {
-                        (!dataSource || dataSource.length === 0) && <li className={`${prefixCls}_dropdown--item-nodata`}> 暂无数据 </li>
+                        (!dataSource || dataSource.length === 0) && <li className={`${prefixCls}_dropdown--item-nodata`}> {searchEmptyResult} </li>
                     }
                 </ul>
             </div>

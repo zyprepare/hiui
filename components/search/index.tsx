@@ -21,7 +21,8 @@ const Search: React.FC<SearchProps> = props=> {
         disabled,
         historyDataSource,
         dataSource,
-        onDelete
+        onDelete,
+        localeDatas
     } = props
     const closeDropdown = (e) => {
         setDropdownShow(e.target.className === 'hi-input__text ') 
@@ -74,6 +75,7 @@ const Search: React.FC<SearchProps> = props=> {
                     dataSource = {dataSource}
                     onDelete = {onDelete}
                     dropdownShow = {dropdownShow}
+                    localeDatas = {localeDatas}
                     onMouseEnter = {()=>{
                         setEnterDropdown(true)
                     }}

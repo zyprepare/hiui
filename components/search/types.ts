@@ -15,6 +15,7 @@ export interface SearchDropdownPorps {
     searchInputContainer : any
     onMouseEnter : () => void;
     onMouseLeave : () => void;
+    localeDatas : any
 }
 export interface SearchProps {
     prepend ?: JSX.Element;
@@ -25,6 +26,6 @@ export interface SearchProps {
     onChange ?: (param: string) => void;
     onSearch ?: (param: string,item?:DataSourceItem) => void;
     onDelete ?: () => void;
-    OnMore ?: () => void; // 查看更多
     style ?: React.CSSProperties;
+    localeDatas : any
 }

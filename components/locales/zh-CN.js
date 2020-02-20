@@ -91,5 +91,10 @@ export default {
     searchEmptyResult: '未找到搜索结果',
     modalTitle: '提示',
     delTips: '删除节点将删除所有子节点，确定删除吗？'
+  },
+  search: {
+    searchEmptyResult: '未找到搜索结果',
+    searchEmptyRecord: '无搜索记录',
+    searchRecord: '搜索历史'
   }
 }
