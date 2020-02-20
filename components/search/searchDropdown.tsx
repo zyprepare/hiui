@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Icon from '../icon'
 import {DataSourceItem,SearchDropdownPorps} from './types'
 
-const SearchDropdown = (props: SearchDropdownPorps) => {
+const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
     const {
         dataSource,
         prefixCls,
@@ -13,7 +13,7 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
         onDelete,
         OnMore
     } = props
-    const hightlightKeyword = (text, uniqueKey) => {
+    const hightlightKeyword = (text, uniqueKey):React.ReactNode => {
         const searchbarValue = inputVal
         let keyword = inputVal
         keyword = searchbarValue.includes('[') ? keyword.replace(/\[/gi, '\\[') : keyword
@@ -35,11 +35,11 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
             : text
         )
     }
-    const ItemChildren = (item: DataSourceItem) => {
+    const ItemChildren = (item: DataSourceItem):React.ReactNode => {
         return (
             <ul>{
                 item.children ? item.children.map(ele=>{
-                    return <li className={`${prefixCls}_dropdown--item`} style={{padding: 0}} key={ele.text} >
+                    return <li className={`${prefixCls}_dropdown--item`} style={{padding: 0}} key={ele.value} >
                         <span 
                             className={`${prefixCls}_dropdown--item_normal`}
                             onClick={() => {
@@ -55,7 +55,7 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
         )
     }
     
-    const DataSourceRender = (item:DataSourceItem) => {
+    const DataSourceRender = (item:DataSourceItem):React.ReactNode=> {
         const className = classNames(
             `${prefixCls}_dropdown--item_normal`,
             {[`${prefixCls}_dropdown--item-title`] :item.children}
@@ -80,7 +80,7 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
         )
     }
     
-    const HistoryRender = () => {
+    const HistoryRender = ():React.ReactNode => {
         const HistoryTitle = inputVal.length === 0 && historyDataSource && historyDataSource.length > 0 ? 
                             <li className={`${prefixCls}_dropdown--item ${prefixCls}_dropdown--item-history`}>
                                 <span>搜索历史</span>
@@ -98,7 +98,6 @@ const SearchDropdown = (props: SearchDropdownPorps) => {
     }
     
     const data = inputVal.length ? dataSource : historyDataSource
-    console.log('historyDataSource',historyDataSource)
     return (
         
         <div className ={`${prefixCls}_dropdown`}>

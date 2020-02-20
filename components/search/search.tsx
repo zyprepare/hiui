@@ -6,7 +6,7 @@ import Popper from '../popper'
 import {DataSourceItem,SearchProps} from './types'
 import './style'
 
-const Search = (props:SearchProps) => {
+const Search: React.FC<SearchProps> = props=> {
     const [dropdownShow, setdropdownShow] = useState(false)
     const searchInputContainer:any = useRef()
     const [inputVal,setinputVal] = useState('')
