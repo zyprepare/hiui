@@ -43,18 +43,18 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
     const ItemChildren = (item: DataSourceItem):React.ReactNode => {
         return (
             <ul>{
-                item.children ? item.children.map(ele=>{
+                item.children && item.children.map(ele=>{
                     return <li className={`${prefixCls}_dropdown--item`} style={{padding: 0}} key={ele.value} >
                         <span 
                             className={`${prefixCls}_dropdown--item_normal`}
                             onClick={() => {
-                                itemClick(ele.text,ele)
+                                itemClick(typeof ele.text === 'string' ? ele.text : ele.value,ele)
                             }}
                         >
-                            {hightlightKeyword(ele.text,ele.value)}
+                            {typeof ele.text === 'string' ? hightlightKeyword(ele.text,ele.value) : ele.text}
                         </span>
                     </li>
-                }) : null
+                })
             }
             </ul>
         )
@@ -73,10 +73,10 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
                 <span 
                     className={className} 
                     onClick={() => {
-                        itemClick(item.text,item)
+                        itemClick(typeof item.text === 'string' ? item.text : item.value,item)
                     }}
                 >
-                    {hightlightKeyword(item.text,item.value)}
+                    {typeof item.text === 'string' ? hightlightKeyword(item.text,item.value) : item.text}
                 </span>
                 {
                     item.children && ItemChildren(item)

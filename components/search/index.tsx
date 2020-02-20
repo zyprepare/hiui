@@ -29,6 +29,7 @@ const Search: React.FC<SearchProps> = props=> {
     }
     
     const itemClick = (value,item: DataSourceItem) => {
+        console.log('va',value)
         setInputVal(value)
         setDropdownShow(false)
         onSearch && onSearch(value,item)

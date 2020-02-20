@@ -1,6 +1,7 @@
 import React from 'react'
 import DocViewer from '../../../libs/doc-viewer'
 import Search from '../../../components/search'
+import Icon from '../../../components/icon'
 const prefix = 'search-relation'
 const leftOptions = ['基础', '分组']
 const desc = '输入搜索关键词时，可以自动联想匹配的关键字，提高检索效率'
@@ -156,6 +157,12 @@ const code = [
                     text: '小米 小爱音响'
                   },
                 ]
+              },
+              {
+                value:'more',
+                text:<div style={{textAlign:'center'}}>
+                    查看更多
+                  </div>,
               }
             ]
         }
@@ -186,7 +193,7 @@ const DemoRelation = () => (
   <DocViewer
     code={code}
     leftOptions={leftOptions}
-    scope={{Search}}
+    scope={{Search, Icon}}
     prefix={prefix}
     desc={desc}
   />
