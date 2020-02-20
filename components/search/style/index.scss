@@ -6,6 +6,35 @@ $themeColor: #4284f5 !default;
 .#{$search} {
   display: inline-block;
 
+  &_input {
+    display: flex;
+
+    .hi-input__inner {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:hover {
+        .hi-btn {
+          border-left-color: transparent;
+        }
+      }
+    }
+
+    .hi-btn {
+      border-left-color: transparent;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+
+      &:hover {
+        border-color: $themeColor;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+
   .hi-icon.icon-search {
     color: $themeColor;
   }

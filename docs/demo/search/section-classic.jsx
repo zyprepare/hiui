@@ -31,7 +31,7 @@ const code = `import React from 'react'
             placeholder='搜索关键字'
             prepend={prepend}
             onSearch = {(value) => {
-              console.log('输入框中的关键字', value)
+              console.log('Input Value', value)
             }}
           />
         )

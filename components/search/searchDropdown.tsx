@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import Icon from '../icon'
+import Popper from '../popper'
 import {DataSourceItem,SearchDropdownPorps} from './types'
 
 const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
@@ -11,7 +12,10 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
         historyDataSource,
         inputVal = '',
         onDelete,
-        OnMore
+        dropdownShow,
+        searchInputContainer,
+        onMouseLeave,
+        onMouseEnter
     } = props
     const hightlightKeyword = (text, uniqueKey):React.ReactNode => {
         const searchbarValue = inputVal
@@ -99,25 +103,33 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
     
     const data = inputVal.length ? dataSource : historyDataSource
     return (
-        
-        <div className ={`${prefixCls}_dropdown`}>
-             <ul className ={`${prefixCls}_dropdown--items`} style={{height: OnMore ? 224 : 260}}>
-                { HistoryRender() }
-                {
-                    data && data.map((item)=>{
-                        return DataSourceRender(item)
-                    })
-                }
-                {
-                    (!dataSource || dataSource.length === 0) && <li className={`${prefixCls}_dropdown--item-nodata`}> 暂无数据 </li>
-                }
-            </ul>
-            {
-                OnMore && <p className={`${prefixCls}_dropdown--more`} onClick={()=>{
-                    OnMore && OnMore()
-                }}>查看更多 <Icon name='right' /></p>
-            }
-        </div>
+        <Popper
+            show={dropdownShow}
+            attachEle={searchInputContainer.current}
+            zIndex={1050}
+            topGap={5}
+            onMouseEnter = {()=>{
+                onMouseEnter()
+            }}
+            onMouseLeave = {()=>{
+                onMouseLeave()
+            }}
+            className={`${prefixCls}__popper`}
+            placement="top-bottom-start">
+            <div className ={`${prefixCls}_dropdown`}>
+                    <ul className ={`${prefixCls}_dropdown--items`}>
+                    { HistoryRender() }
+                    {
+                        data && data.map((item)=>{
+                            return DataSourceRender(item)
+                        })
+                    }
+                    {
+                        (!dataSource || dataSource.length === 0) && <li className={`${prefixCls}_dropdown--item-nodata`}> 暂无数据 </li>
+                    }
+                </ul>
+            </div>
+        </Popper>
     )
 }
 

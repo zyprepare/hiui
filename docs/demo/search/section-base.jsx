@@ -15,7 +15,7 @@ const code = [
             style={{ width: 260 }}
             placeholder='搜索关键字'
             onSearch = {(value) => {
-              console.log('输入框中的关键字', value)
+              console.log('Input Value', value)
             }}
           />
         )
@@ -34,7 +34,7 @@ const code = [
             placeholder='搜索关键字'
             disabled
             onSearch = {(value) => {
-              console.log('输入框中的关键字', value)
+              console.log('Input Value', value)
             }}
           />
         )

@@ -79,7 +79,7 @@ const code = [
             historyDataSource = {this.state.historyDataSource}
             dataSource = {this.state.dataSource}
             onSearch = {(value) => {
-              console.log('输入框中的关键字', value)
+              console.log('Input Value', value)
             }}
           />
         )
@@ -173,7 +173,7 @@ const code = [
             historyDataSource = {this.state.historyDataSource}
             dataSource = {this.state.dataSource}
             onSearch = {(value) => {
-              console.log('输入框中的关键字', value)
+              console.log('Input Value', value)
             }}
           />
         )

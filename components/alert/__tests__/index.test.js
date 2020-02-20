@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount, shallow } from 'enzyme'
 import sinon,{ spy, fake } from 'sinon'
-import Alert from '../alert'
+import Alert from '../Alert'
 /* eslint-env jest */
 describe('Alert', () => {
   let clock
