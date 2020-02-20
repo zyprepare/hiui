@@ -9,7 +9,7 @@ import './style'
 
 const Search: React.FC<SearchProps> = props=> {
     const [dropdownShow, setDropdownShow] = useState(false)
-    const searchInputContainer:any = useRef()
+    const searchInputContainer: any = useRef()
     const [inputVal,setInputVal] = useState('')
     const [enterDropdown,setEnterDropdown] = useState(false)
     const { 
