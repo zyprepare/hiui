@@ -27,7 +27,7 @@ const Search: React.FC<SearchProps> = props=> {
         setDropdownShow(e.target.className === 'hi-input__text ') 
     }
     
-    const itemClick = (value,item :DataSourceItem) => {
+    const itemClick = (value,item: DataSourceItem) => {
         setInputVal(value)
         setDropdownShow(false)
         onSearch && onSearch(value,item)

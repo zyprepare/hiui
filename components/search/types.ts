@@ -1,7 +1,7 @@
 export interface DataSourceItem {
     value: any;
     text: React.ReactNode | string;
-    children ?:Array<DataSourceItem> 
+    children ?: Array<DataSourceItem> 
 }
 export interface SearchDropdownPorps {
     width ?: number;

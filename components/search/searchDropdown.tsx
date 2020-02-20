@@ -59,7 +59,7 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
         )
     }
     
-    const DataSourceRender = (item:DataSourceItem):React.ReactNode=> {
+    const DataSourceRender = (item: DataSourceItem):React.ReactNode=> {
         const className = classNames(
             `${prefixCls}_dropdown--item_normal`,
             {[`${prefixCls}_dropdown--item-title`] :item.children}
