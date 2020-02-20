@@ -2,14 +2,14 @@ import React from 'react'
 import classNames from 'classnames'
 import Icon from '../icon'
 import Popper from '../popper'
-import {DataSourceItem,SearchDropdownPorps} from './types'
+import {DataItem,SearchDropdownPorps} from './types'
 
 const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
     const {
-        dataSource,
+        data,
         prefixCls,
         itemClick,
-        historyDataSource,
+        historyData,
         inputVal = '',
         onDelete,
         dropdownShow,
@@ -18,14 +18,14 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
         onMouseEnter,
         localeDatas
     } = props
-    const hightlightKeyword = (text, uniqueKey):React.ReactNode => {
+    const hightlightKeyword = (title, uniqueKey):React.ReactNode => {
         const searchbarValue = inputVal
         let keyword = inputVal
         keyword = searchbarValue.includes('[') ? keyword.replace(/\[/gi, '\\[') : keyword
         keyword = searchbarValue.includes('(') ? keyword.replace(/\(/gi, '\\(') : keyword
         keyword = searchbarValue.includes(')') ? keyword.replace(/\)/gi, '\\)') : keyword
     
-        const parts = text.split(new RegExp(`(${keyword})`, 'gi'))
+        const parts = title.split(new RegExp(`(${keyword})`, 'gi'))
         return (
             inputVal && inputVal.length > 0 ? <p key={uniqueKey}>
             { parts.map((part) =>
@@ -37,21 +37,21 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
             )
             }
           </p>
-            : text
+            : title
         )
     }
-    const ItemChildren = (item: DataSourceItem):React.ReactNode => {
+    const ItemChildren = (item: DataItem):React.ReactNode => {
         return (
             <ul>{
                 item.children && item.children.map(ele=>{
-                    return <li className={`${prefixCls}_dropdown--item`} style={{padding: 0}} key={ele.value} >
+                    return <li className={`${prefixCls}_dropdown--item`} style={{padding: 0}} key={ele.id} >
                         <span 
                             className={`${prefixCls}_dropdown--item_normal`}
                             onClick={() => {
-                                itemClick(typeof ele.text === 'string' ? ele.text : ele.value,ele)
+                                itemClick(typeof ele.title === 'string' ? ele.title : ele.id,ele)
                             }}
                         >
-                            {typeof ele.text === 'string' ? hightlightKeyword(ele.text,ele.value) : ele.text}
+                            {typeof ele.title === 'string' ? hightlightKeyword(ele.title,ele.id) : ele.title}
                         </span>
                     </li>
                 })
@@ -60,7 +60,7 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
         )
     }
     
-    const DataSourceRender = (item: DataSourceItem):React.ReactNode=> {
+    const DataSourceRender = (item: DataItem):React.ReactNode=> {
         const className = classNames(
             `${prefixCls}_dropdown--item_normal`,
             {[`${prefixCls}_dropdown--item-title`] :item.children}
@@ -68,15 +68,15 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
         return (
             <li 
                 className={`${prefixCls}_dropdown--item`} 
-                key={item.value} 
+                key={item.id} 
             >
                 <span 
                     className={className} 
                     onClick={() => {
-                        itemClick(typeof item.text === 'string' ? item.text : item.value,item)
+                        itemClick(typeof item.title === 'string' ? item.title : item.id,item)
                     }}
                 >
-                    {typeof item.text === 'string' ? hightlightKeyword(item.text,item.value) : item.text}
+                    {typeof item.title === 'string' ? hightlightKeyword(item.title,item.id) : item.title}
                 </span>
                 {
                     item.children && ItemChildren(item)
@@ -87,7 +87,7 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
     
     const HistoryRender = ():React.ReactNode => {
         const {searchRecord, searchEmptyRecord} = localeDatas.search
-        const HistoryTitle = inputVal.length === 0 && historyDataSource && historyDataSource.length > 0 ? 
+        const HistoryTitle = inputVal.length === 0 && historyData && historyData.length > 0 ? 
                             <li className={`${prefixCls}_dropdown--item ${prefixCls}_dropdown--item-history`}>
                                 <span>{searchRecord}</span>
                                 <Icon name='delete' onClick={()=>{
@@ -96,14 +96,14 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
                                 }}/>
                             </li> : null
         const HistoryNoData = <li className={`${prefixCls}_dropdown--item-nodata`}> {searchEmptyRecord} </li>
-        const showHistoryNode = inputVal.length === 0 && historyDataSource && historyDataSource.length === 0
+        const showHistoryNode = inputVal.length === 0 && historyData && historyData.length === 0
         return (
             showHistoryNode ? HistoryNoData : HistoryTitle
 
         )
     }
     
-    const data = inputVal.length ? dataSource : historyDataSource
+    const dataRender = inputVal.length ? data : historyData
     const {searchEmptyResult} = localeDatas.search
     return (
         <Popper
@@ -123,12 +123,12 @@ const SearchDropdown :React.FC<SearchDropdownPorps> = props => {
                     <ul className ={`${prefixCls}_dropdown--items`}>
                     { HistoryRender() }
                     {
-                        data && data.map((item)=>{
+                        dataRender && dataRender.map((item)=>{
                             return DataSourceRender(item)
                         })
                     }
                     {
-                        (!dataSource || dataSource.length === 0) && <li className={`${prefixCls}_dropdown--item-nodata`}> {searchEmptyResult} </li>
+                        (!data || data.length === 0) && <li className={`${prefixCls}_dropdown--item-nodata`}> {searchEmptyResult} </li>
                     }
                 </ul>
             </div>

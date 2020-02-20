@@ -2,14 +2,14 @@ import React, {useState,useRef} from 'react'
 import Input from '../input'
 import Button from '../button'
 import SearchDropdown from './searchDropdown'
-import {DataSourceItem,SearchProps} from './types'
+import {DataItem,SearchProps} from './types'
 import Provider from '../context'
 
 import './style'
 
 const Search: React.FC<SearchProps> = props=> {
     const [dropdownShow, setDropdownShow] = useState(false)
-    const searchInputContainer: any = useRef()
+    const searchInputContainer  = useRef(null)
     const [inputVal,setInputVal] = useState('')
     const [enterDropdown,setEnterDropdown] = useState(false)
     const { 
@@ -19,8 +19,8 @@ const Search: React.FC<SearchProps> = props=> {
         placeholder,
         prepend,
         disabled,
-        historyDataSource,
-        dataSource,
+        historyData,
+        data,
         onDelete,
         localeDatas
     } = props
@@ -28,7 +28,7 @@ const Search: React.FC<SearchProps> = props=> {
         setDropdownShow(e.target.className === 'hi-input__text ') 
     }
     
-    const itemClick = (value,item: DataSourceItem) => {
+    const itemClick = (value,item: DataItem) => {
         console.log('va',value)
         setInputVal(value)
         setDropdownShow(false)
@@ -48,7 +48,7 @@ const Search: React.FC<SearchProps> = props=> {
                     clearable="true"
                     prepend = {prepend}
                     onFocus = {(e)=>{
-                        historyDataSource && closeDropdown(e)
+                        historyData && closeDropdown(e)
                     }}
                     onBlur = {()=>{
                         setDropdownShow(enterDropdown)
@@ -56,7 +56,7 @@ const Search: React.FC<SearchProps> = props=> {
                     onChange = {(e)=>{
                         const {value} = e.target
                         setInputVal(value)
-                        dataSource && value.length>0 && setDropdownShow(true)
+                        data && value.length>0 && setDropdownShow(true)
                         onChange && onChange(value)
                     }}
                 />
@@ -69,11 +69,11 @@ const Search: React.FC<SearchProps> = props=> {
                     onSearch && onSearch(inputVal)
                 }} />
             </div>
-            { dataSource || historyDataSource ? <SearchDropdown  
+            { data || historyData ? <SearchDropdown  
                     prefixCls = {prefixCls} 
                     inputVal = {inputVal}
                     itemClick = {itemClick}
-                    dataSource = {dataSource}
+                    data = {data}
                     onDelete = {onDelete}
                     dropdownShow = {dropdownShow}
                     localeDatas = {localeDatas}
@@ -84,7 +84,7 @@ const Search: React.FC<SearchProps> = props=> {
                         setEnterDropdown(false)
                     }}
                     searchInputContainer = {searchInputContainer}
-                    historyDataSource = {historyDataSource}
+                    historyData = {historyData}
                 /> : null
             }
         </div>

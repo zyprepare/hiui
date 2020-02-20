@@ -13,56 +13,56 @@ const code = [
       constructor () {
         super()
         this.state = {
-          historyDataSource:[
+          historyData:[
               {
-                value: 1,
-                text: '小米9'
+                id: 1,
+                title: '小米9'
               },
               {
-                value: 2,
-                text: '探索版'
+                id: 2,
+                title: '探索版'
               },
               {
-                value: 3,
-                text: 'MIX系列'
+                id: 3,
+                title: 'MIX系列'
               },
               {
-                value: 4,
-                text: '智能硬件'
+                id: 4,
+                title: '智能硬件'
               },
               {
-                value: 5,
-                text: '扫地机器人'
+                id: 5,
+                title: '扫地机器人'
               },
               {
-                value: 6,
-                text: '小米10'
+                id: 6,
+                title: '小米10'
               },
             ],
-            dataSource: [
+            data: [
               {
-                value: 1,
-                text: '小米9 青春版'
+                id: 1,
+                title: '小米9 青春版'
               },
               {
-                value: 2,
-                text: '小米9'
+                id: 2,
+                title: '小米9'
               },
               {
-                value: 3,
-                text: '小米9 Pro'
+                id: 3,
+                title: '小米9 Pro'
               },
               {
-                value: 4,
-                text: '小米9 探索版'
+                id: 4,
+                title: '小米9 探索版'
               },
               {
-                value: 5,
-                text: '小米9 CC'
+                id: 5,
+                title: '小米9 CC'
               },
               {
-                value: 6,
-                text: '小米9 CC 美图定制版'
+                id: 6,
+                title: '小米9 CC 美图定制版'
               },
             ]
         }
@@ -74,13 +74,13 @@ const code = [
             placeholder='搜索关键字'
             onDelete = {()=>{
               this.setState ({
-                historyDataSource : []
+                historyData : []
               })
             }}
-            historyDataSource = {this.state.historyDataSource}
-            dataSource = {this.state.dataSource}
-            onSearch = {(value) => {
-              console.log('Input Value', value)
+            historyData = {this.state.historyData}
+            data = {this.state.data}
+            onSearch = {(title) => {
+              console.log('Input id', title)
             }}
           />
         )
@@ -95,72 +95,72 @@ const code = [
       constructor () {
         super()
         this.state = {
-          historyDataSource:[
+          historyData:[
               {
-                value: 1,
-                text: '小米9'
+                id: 1,
+                title: '小米9'
               },
               {
-                value: 2,
-                text: '探索版'
+                id: 2,
+                title: '探索版'
               },
               {
-                value: 3,
-                text: 'MIX系列'
+                id: 3,
+                title: 'MIX系列'
               },
               {
-                value: 4,
-                text: '智能硬件'
+                id: 4,
+                title: '智能硬件'
               },
               {
-                value: 5,
-                text: '扫地机器人'
+                id: 5,
+                title: '扫地机器人'
               },
               {
-                value: 6,
-                text: '小米10'
+                id: 6,
+                title: '小米10'
               },
             ],
-            dataSource: [
+            data: [
               {
-                value:'miphone',
-                text:'手机',
+                id:'miphone',
+                title:'手机',
                 children :[
                   {
-                    value: 1,
-                    text: '小米9 Pro'
+                    id: 1,
+                    title: '小米9 Pro'
                   },
                   {
-                    value: 2,
-                    text: '小米9 探索版'
+                    id: 2,
+                    title: '小米9 探索版'
                   },
                   {
-                    value: 3,
-                    text: '小米9 CC 美图定制版'
+                    id: 3,
+                    title: '小米9 CC 美图定制版'
                   },
                 ]
               },
               {
-                value:'live',
-                text:'智能生活',
+                id:'live',
+                title:'智能生活',
                 children:[
                   {
-                    value: 4,
-                    text: '小米 手环'
+                    id: 4,
+                    title: '小米 手环'
                   },
                   {
-                    value: 5,
-                    text: '小米 净水器'
+                    id: 5,
+                    title: '小米 净水器'
                   },
                   {
-                    value: 6,
-                    text: '小米 小爱音响'
+                    id: 6,
+                    title: '小米 小爱音响'
                   },
                 ]
               },
               {
-                value:'more',
-                text:<div style={{textAlign:'center'}}>
+                id:'more',
+                title:<div style={{textAlign:'center'}}>
                     查看更多
                   </div>,
               }
@@ -174,13 +174,13 @@ const code = [
             placeholder='搜索关键字'
             onDelete = {()=>{
               this.setState ({
-                historyDataSource : []
+                historyData : []
               })
             }}
-            historyDataSource = {this.state.historyDataSource}
-            dataSource = {this.state.dataSource}
-            onSearch = {(value) => {
-              console.log('Input Value', value)
+            historyData = {this.state.historyData}
+            data = {this.state.data}
+            onSearch = {(title) => {
+              console.log('Input id', title)
             }}
           />
         )

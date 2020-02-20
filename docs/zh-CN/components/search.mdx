@@ -30,16 +30,21 @@ import DemoClassic from '../../demo/search/section-classic.jsx'
 | prepend       | 输入框前置内容     | string \| ReactNode | -                                                                      | -      |
 | disabled     | 是否禁用           | boolean             | true \| false                                                          | false  |
 | placeholder  | 输入框占位符       | string \| ReactNode | -                                                                      | -      |
-| historyDataSource  | 显示搜索历史的数据    | `Array<DataSourceItem>` | -                                                           | -      |
-| dataSource    | 搜索结果的数据      | `Array<DataSourceItem>` | -                                                           | -      |
+| historyData  | 显示搜索历史的数据    | `Array<DataItem>` | -                                                           | -      |
+| data    | 搜索结果的数据      | `Array<DataItem>` | -                                                           | -      |
 | onChange     | 值改变时的回调     | (e: Event) => void  | -                                                                      | -      |
-| onSearch     | 当点击搜索按钮时候或者点击模糊匹配的选项时     | (inputVal: string, item ?:DataSourceItem) => void                    | -                                                                      | -      |
+| onSearch     | 当点击搜索按钮时候或者点击模糊匹配的选项时     | (inputVal: string, item ?:DataItem) => void                    | -                                                                      | -      |
 | onDelete     | 点击搜索记录删除按钮时的回调  | () => void                    | -                                                                      | -      |
-| allUrl       | 点击查看更多的url  | string                  | -                                                                      | -      |
 
-## DataSourceItem
+## DataItem
  参数         | 说明               | 类型                | 可选值                                                                 | 默认值 |
 | ------------ | ------------------ | ------------------- | ---------------------------------------------------------------------- | ------ |
-| value     | 参数    | string \| number     | -                                                                      | -      |
-| text     | 显示的内容；如果存在children;就是这个类别的title | string \| ReactNode  | -                                                                      | -      |
-| children     | 分组内容  | `Array<DataSourceItem>`     | -                                                                      | -      |
+| id     | 主键    | string \| number     | -                                                                      | -      |
+| title     | 显示的内容；如果存在children;就是这个类别的title | string \| ReactNode  | -                                                                      | -      |
+| children     | 分组内容  | `Array<Item>`     | -                                                                      | -      |
+
+## Item
+ 参数         | 说明               | 类型                | 可选值                                                                 | 默认值 |
+| ------------ | ------------------ | ------------------- | ---------------------------------------------------------------------- | ------ |
+| id     | 主键    | string \| number     | -                                                                      | -      |
+| title     | 类别的title内容 | string \| ReactNode  | -                                                                      | -      |

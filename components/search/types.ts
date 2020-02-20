@@ -1,16 +1,20 @@
-export interface DataSourceItem {
-    value: any;
-    text: React.ReactNode | string;
-    children ?: Array<DataSourceItem> 
+export interface DataItem {
+    id: any;
+    title: React.ReactNode | string;
+    children ?: Array<Item> 
+}
+export interface Item {
+    id: any;
+    title: React.ReactNode | string;
 }
 export interface SearchDropdownPorps {
     width ?: number;
-    dataSource ?: Array<DataSourceItem>;
+    data ?: Array<DataItem>;
     prefixCls ?: string;
-    itemClick : (value,item ?:DataSourceItem)=>void;          
+    itemClick : (value,item ?:DataItem)=>void;          
     inputVal : string;
     onDelete ?: () => void;
-    historyDataSource ?:Array<DataSourceItem>;
+    historyData ?:Array<DataItem>;
     dropdownShow : boolean;
     searchInputContainer : any
     onMouseEnter : () => void;
@@ -21,10 +25,10 @@ export interface SearchProps {
     prepend ?: JSX.Element;
     disabled ?: boolean
     placeholder ?: string;
-    historyDataSource ?: Array<DataSourceItem>;  // 如果有值就展示；
-    dataSource ?: Array<DataSourceItem>; // 如果有值就展示
+    historyData ?: Array<DataItem>;  // 如果有值就展示；
+    data ?: Array<DataItem>; // 如果有值就展示
     onChange ?: (param: string) => void;
-    onSearch ?: (param: string,item?:DataSourceItem) => void;
+    onSearch ?: (param: string,item?:DataItem) => void;
     onDelete ?: () => void;
     style ?: React.CSSProperties;
     localeDatas : any

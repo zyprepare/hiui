@@ -14,8 +14,8 @@ const code = [
           <Search 
             style={{ width: 260 }}
             placeholder='搜索关键字'
-            onSearch = {(value) => {
-              console.log('Input Value', value)
+            onSearch = {(title) => {
+              console.log('Input Value', title)
             }}
           />
         )
@@ -33,8 +33,8 @@ const code = [
             style={{ width: 250 }}
             placeholder='搜索关键字'
             disabled
-            onSearch = {(value) => {
-              console.log('Input Value', value)
+            onSearch = {(title) => {
+              console.log('Input Value', title)
             }}
           />
         )

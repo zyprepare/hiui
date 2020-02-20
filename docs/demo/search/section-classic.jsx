@@ -30,8 +30,8 @@ const code = `import React from 'react'
             style={{ width: 360 }}
             placeholder='搜索关键字'
             prepend={prepend}
-            onSearch = {(value) => {
-              console.log('Input Value', value)
+            onSearch = {(title) => {
+              console.log('Input Value', title)
             }}
           />
         )
