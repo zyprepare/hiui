@@ -11,7 +11,6 @@ export interface SearchDropdownPorps {
     inputVal : string;
     onDelete ?: () => void;
     historyDataSource ?:Array<DataSourceItem>;
-    OnMore ?: () => void;
     dropdownShow : boolean;
     searchInputContainer : any
     onMouseEnter : () => void;
@@ -27,6 +26,5 @@ export interface SearchProps {
     onSearch ?: (param: string,item?:DataSourceItem) => void;
     onDelete ?: () => void;
     OnMore ?: () => void; // 查看更多
-    allUrl ?: string; // 查看更多
     style ?: React.CSSProperties;
 }
