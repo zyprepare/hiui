@@ -7,39 +7,40 @@ const desc = '按搜索关键字直接请求结果'
 const code = [
   {
     code: `import React from 'react'
-    import Search from '@hi-ui/hiui/es/Search'
-    class Demo extends React.Component {
-      render() {
-        return (
-          <Search 
-            style={{ width: 260 }}
-            placeholder='搜索关键字'
-            onSearch = {(title) => {
-              console.log('Input Value', title)
-            }}
-          />
-        )
-      }
-    }`,
+import Search from '@hi-ui/hiui/es/Search'
+
+class Demo extends React.Component {
+  render() {
+    return (
+      <Search 
+        style={{ width: 260 }}
+        placeholder='搜索关键字'
+        onSearch = {(title) => {
+          console.log('Input Value', title)
+        }}
+      />
+    )
+  }
+}`,
     opt: ['基础']
   },
   {
     code: `import React from 'react'
-    import Search from '@hi-ui/hiui/es/Search'
-    class Demo extends React.Component {
-      render() {
-        return (
-          <Search 
-            style={{ width: 250 }}
-            placeholder='搜索关键字'
-            disabled
-            onSearch = {(title) => {
-              console.log('Input Value', title)
-            }}
-          />
-        )
-      }
-    }`,
+import Search from '@hi-ui/hiui/es/Search'
+class Demo extends React.Component {
+  render() {
+    return (
+      <Search 
+        style={{ width: 250 }}
+        placeholder='搜索关键字'
+        disabled
+        onSearch = {(title) => {
+          console.log('Input Value', title)
+        }}
+      />
+    )
+  }
+}`,
     opt: ['禁用']
   }
 ]
