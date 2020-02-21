@@ -32,8 +32,8 @@ describe('Search', () => {
             <Search 
               style={{ width: 260 }}
               placeholder='搜索关键字'
-              onSearch = {(value) => {
-                console.log('Input Value', value)
+              onSearch = {(id) => {
+                console.log('Input id', id)
               }}
           />
         )
@@ -78,13 +78,13 @@ describe('Search', () => {
         const wrapper = mount(
             <Search 
               style={{ width: 260 }}
-              historyDataSource = {[{
-                  value: 1,
-                  text: '小米9'
+              historyData = {[{
+                  id: 1,
+                  title: '小米9'
               }]}
-              dataSource = {[{
-                value: 1,
-                text: '小米9 青春版'
+              data = {[{
+                id: 1,
+                title: '小米9 青春版'
               }]}
               placeholder='搜索关键字'
               onDelete = {callback}
@@ -105,13 +105,13 @@ describe('Search', () => {
         const wrapper = mount(
             <Search 
               style={{ width: 260 }}
-              historyDataSource = {[{
-                  value: 1,
-                  text: '小米9'
+              historyData = {[{
+                  id: 1,
+                  title: '小米9'
               }]}
-              dataSource = {[{
-                value: 1,
-                text: '小米9 青春版'
+              data = {[{
+                id: 1,
+                title: '小米9 青春版'
               }]}
               placeholder='搜索关键字'
               onChange = {callback}
@@ -125,19 +125,19 @@ describe('Search', () => {
       })
     })
 
-    it('historyDataSource && dataSource', () => {
+    it('historyData && data', () => {
       const callback = fake()
         const wrapper = mount(
             <Search 
               style={{ width: 260 }}
               placeholder='搜索关键字'
-              historyDataSource = {[{
-                  value: 1,
-                  text: '小米9'
+              historyData = {[{
+                  id: 1,
+                  title: '小米9'
               }]}
-              dataSource = {[{
-                value: 1,
-                text: '小米9 青春版'
+              data = {[{
+                id: 1,
+                title: '小米9 青春版'
               }]}
               onSearch = {callback}
           />
@@ -154,14 +154,14 @@ describe('Search', () => {
         expect(callback.callCount).toEqual(1)
         wrapper.unmount()
     })
-    it('historyDataSource && dataSource', () => {
+    it('historyData && data', () => {
       const callback = fake()
         const wrapper = mount(
             <Search 
               style={{ width: 260 }}
               placeholder='搜索关键字'
-              historyDataSource = {[]}
-              dataSource = {[]}
+              historyData = {[]}
+              data = {[]}
               onSearch = {callback}
           />
         )
@@ -175,22 +175,22 @@ describe('Search', () => {
             <Search 
               style={{ width: 260 }}
               placeholder='搜索关键字'
-              historyDataSource = {[{
-                  value: 1,
-                  text: <span>查看更多</span>
+              historyData = {[{
+                  id: 1,
+                  title: <span>查看更多</span>
               }]}
-              dataSource = {[
+              data = {[
                 {
-                  value: 1,
-                  text: '(小米[9]) 青春版',
+                  id: 1,
+                  title: '(小米[9]) 青春版',
                   children : [
                     {
-                      value: 2,
-                      text: '小米10'
+                      id: 2,
+                      title: '小米10'
                     },
                     {
-                      value: 3,
-                      text: <span>查看更多</span>
+                      id: 3,
+                      title: <span>查看更多</span>
                     },
                   ]
                 }
