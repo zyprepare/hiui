@@ -126,16 +126,27 @@ class UploadAvatar extends Upload {
   }
 
   render () {
-    const { disabled, accept, localeDatas, avatarOptions = {}, onRemove, theme } = this.props
+    const {
+      disabled,
+      accept,
+      localeDatas,
+      avatarOptions = {},
+      onRemove,
+      theme
+    } = this.props
     const { fileList, showCropperModal, showPreviewModal } = this.state
-    const { aspectRatio = 0, dragMode = 'move', dropBoxSize = [] } = avatarOptions
+    const {
+      aspectRatio = 0,
+      dragMode = 'move',
+      dropBoxSize = []
+    } = avatarOptions
     const file = fileList[0]
     return (
       <div className={`theme__${theme} hi-upload hi-upload--avatar`}>
         <ul className='hi-upload__list'>
           {!!file &&
-            (file.uploadState === 'loading'
-              ? <li className='hi-upload__item'>
+            (file.uploadState === 'loading' ? (
+              <li className='hi-upload__item'>
                 <img src={file.url} className='hi-upload__thumb' />
                 <div className='hi-upload__precent'>
                   <p className='hi-upload__loading-text'>
@@ -151,25 +162,30 @@ class UploadAvatar extends Upload {
                   />
                 </div>
               </li>
-              : <li className='hi-upload__item'>
+            ) : (
+              <li className='hi-upload__item'>
                 <img
                   src={file.url}
-                  className={`hi-upload__thumb ${file.uploadState === 'error' && 'error'}`}
+                  className={`hi-upload__thumb ${file.uploadState === 'error' &&
+                    'error'}`}
                 />
-                <div className='hi-upload__item-mask' onClick={() => this.previewImage(file)}>
+                <div
+                  className='hi-upload__item-mask'
+                  onClick={() => this.previewImage(file)}
+                >
                   <Icon name='eye' />
-                  <span>
-                    {localeDatas.upload.preview}
-                  </span>
+                  <span>{localeDatas.upload.preview}</span>
                 </div>
-                {onRemove &&
-                <Icon
-                  name='close-circle'
-                  className='hi-upload__photo-del'
-                  onClick={() => this.deleteFile(file, 0)}
-                />}
-              </li>)}
-          {!file &&
+                {onRemove && (
+                  <Icon
+                    name='close-circle'
+                    className='hi-upload__photo-del'
+                    onClick={() => this.deleteFile(file, 0)}
+                  />
+                )}
+              </li>
+            ))}
+          {!file && (
             <li className='hi-upload__item hi-upload__item--upload'>
               <label style={{ display: 'block' }}>
                 <input
@@ -184,7 +200,8 @@ class UploadAvatar extends Upload {
                 />
                 <Icon name='plus' />
               </label>
-            </li>}
+            </li>
+          )}
         </ul>
         <Modal
           show={showCropperModal}
@@ -214,15 +231,15 @@ class UploadAvatar extends Upload {
             style={{ height: 400, width: '100%' }}
           />
         </Modal>
-        {showPreviewModal &&
-          file &&
+        {showPreviewModal && file && (
           <Preview
             src={file.url}
             images={[file]}
             activeIndex={0}
             show={showPreviewModal}
             onClose={this.closePreviewModal.bind(this)}
-          />}
+          />
+        )}
       </div>
     )
   }
