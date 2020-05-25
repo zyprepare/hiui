@@ -10,14 +10,24 @@ const code = [
     code: `import React from 'react'
 import Select from '@hi-ui/hiui/es/select'\n
 class Demo extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state={
+      value:1,
+      data:[{id:1,title:'默认项'}]
+    }
+  }
   render () {
+    const {value,data} = this.state
     return (
       <Select
         type='single'
+        value={value}
+        data={data}
         dataSource={{
           type: 'GET',
           key: 'id',
-          url: 'http://yapi.demo.qunar.com/mock/26534/hiui/select',
+          url: 'https://www.fastmock.site/mock/eef9b373d82560f30585521549c4b6cb/hiui/api/lsit',
           transformResponse: (res) => {
             console.log('----', res)
             return res.list
@@ -26,7 +36,10 @@ class Demo extends React.Component {
         placeholder='请选择'
         style={{ width: 200 }}
         onChange={(item) => {
-          console.log('异步单选结果', item)
+          console.log('单选选结果', item)
+        this.setState({
+          value:item
+        })
         }}
       />
     )
