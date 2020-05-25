@@ -38,16 +38,26 @@ class Demo extends React.Component {
     code: `import React from 'react'
 import { Select } from '@hi-ui/hiui'\n
 class Demo extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state={
+      value:[1],
+      data:[{id:1,title:'默认项'}]
+    }
+  }
   render () {
+    const {value,data} = this.state
     return (
       <Select
+      data={data}
+      value={value}
       type='multiple'
       style={{width: '300px'}}
       placeholder='请选择'
       dataSource={keyword => {
         return ({
           type: 'GET',
-          url: 'http://yapi.demo.qunar.com/mock/26534/hiui/select',
+          url: 'https://www.fastmock.site/mock/eef9b373d82560f30585521549c4b6cb/hiui/api/lsit',
           params:{id: keyword},
           transformResponse: (res) => {
             return res.list
@@ -57,6 +67,9 @@ class Demo extends React.Component {
       }}
       onChange={(item) => {
         console.log('多选结果', item)
+        this.setState({
+          value:item
+        })
       }}
       />
     )
