@@ -42,7 +42,7 @@ async function render(content, url) {
  * @returns {string[]}
  */
 function getUrls() {
-  const urls = [...getComponentUrls(), ...getDesignUrls(), ...getTemplateUrls(), ...getExtraUrls()]
+  const urls = [...getComponentUrls(), ...getDesignUrls(), ...getTemplateUrls(), ...getDocUrls()]
   const zh = urls.map((v) => `http://localhost:${port}${baseUrl}/zh-CN/${v}`)
   const en = urls.map((v) => `http://localhost:${port}${baseUrl}/en-US/${v}`)
   return [...zh, ...en]
@@ -54,7 +54,7 @@ function getUrls() {
  */
 function getComponentUrls() {
   const compPath = path.resolve(__dirname, '../docs/zh-CN/components')
-  return fs.readdirSync(compPath).map((v) => `docs/${v.replace('.mdx', '')}`)
+  return fs.readdirSync(compPath).map((v) => `components/${v.replace('.mdx', '')}`)
 }
 
 /**
@@ -79,6 +79,7 @@ function getTemplateUrls() {
  * get non-regular pages
  * @returns {string[]}
  */
-function getExtraUrls() {
-  return ['', 'docs/quick-start', 'docs/template', 'docs/theme', 'docs/i18n', 'docs/changelog']
+function getDocUrls() {
+  const compPath = path.resolve(__dirname, '../docs/zh-CN/docs')
+  return fs.readdirSync(compPath).map((v) => `docs/${v.replace('.mdx', '')}`)
 }
