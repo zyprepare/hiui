@@ -115,7 +115,7 @@ class Demo extends React.Component {
     return(
       <Menu
         placement="horizontal"
-        activeId={'xiaomi9'}
+        activeId={1}
         showAllSubMenus
         onClick={(id, prevId)=>console.log('-----click', id, prevId)}
         data={datas}
@@ -124,7 +124,5 @@ class Demo extends React.Component {
   }
 }`
 
-const DemoFat = () => (
-  <DocViewer code={code} desc={desc} scope={{ Menu }} prefix={prefix} />
-)
+const DemoFat = () => <DocViewer code={code} desc={desc} scope={{ Menu }} prefix={prefix} />
 export default DemoFat

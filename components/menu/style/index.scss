@@ -26,6 +26,8 @@
 
 .hi-menu,
 .hi-submenu__popper {
+  outline: none;
+
   ul {
     margin-top: 0;
     margin-bottom: 0;
@@ -44,6 +46,24 @@
 
   .hi-menu-item {
     &--active {
+      > .hi-menu__title .hi-menu__title-content,
+      > .hi-menu__title-content {
+        color: use-color('primary');
+      }
+
+      > .hi-menu__title .hi-menu__title-icon,
+      > .hi-menu__title-icon {
+        color: use-color('primary');
+      }
+
+      > .hi-submenu__title {
+        & > .hi-menu__title-toggle-icon {
+          color: use-color('primary');
+        }
+      }
+    }
+
+    &--focus {
       > .hi-menu__title .hi-menu__title-content,
       > .hi-menu__title-content {
         color: use-color('primary');
@@ -107,7 +127,7 @@
       position: relative;
       margin-right: 48px;
 
-      &--active::after {
+      &--active:not(.hi-submenu)::after {
         content: '';
         position: absolute;
         bottom: 0;
@@ -199,7 +219,7 @@
       &--active {
         background-color: use-color('primary-20');
 
-        &::after {
+        &:not(.hi-submenu)::after {
           content: '';
           position: absolute;
           width: 2px;

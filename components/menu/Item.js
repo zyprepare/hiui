@@ -5,11 +5,26 @@ import Title from './Title'
 
 class Item extends Component {
   render() {
-    const { children, disabled, onClick, level, placement, activeIndex, id, icon, index, data, mini } = this.props
-    const isActive = activeIndex === index
+    const {
+      children,
+      disabled,
+      onClick,
+      level,
+      placement,
+      activeIndex,
+      activeId,
+      id,
+      icon,
+      index,
+      data,
+      mini
+    } = this.props
+    const isFocus = activeIndex === index
+    const isActive = activeId === id
     const cls = classNames('hi-menu-item', 'hi-menu-item__title', 'hi-menu__title', `hi-menu--${level}`, {
       'hi-menu-item--disabled': disabled,
-      'hi-menu-item--active': isActive
+      'hi-menu-item--active': isActive,
+      'hi-menu-item--focus': isFocus
     })
     return (
       <li

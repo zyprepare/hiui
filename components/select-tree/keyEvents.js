@@ -38,7 +38,7 @@ export const moveFocusedIndex = (direction, activeId, selectTreeRoot) => {
  * @typedef {Object} RightOrLeftHandleParam 左右键处理函数参数
  * @property {Number | String} activeId 当前选中的节点ID
  * @property {Array} flattenData 被拉平的数据
- * @property {Array: Object} expandIds 展开的节点数据
+ * @property {Array} expandIds 展开的节点数据
  * @property {Function} expandEvents 展开处理函数
  * @property {Function} setActiveId 设置选中节点ID
  * @property {String} mode normal | breadcrumb

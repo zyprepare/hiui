@@ -4,23 +4,32 @@ import classNames from 'classnames'
 import Popper from '../popper'
 import Icon from '../icon'
 import Title from './Title'
+import EventEmitter from '../_util/EventEmitter'
+
 class SubMenu extends Component {
-  onClick(index) {
+  onClick = (index) => {
+    console.log('index', index)
     this.props.onClick(index)
   }
 
   checkActive(activeIndex, index) {
     const indexArr = index.split('-')
     const activeIndexArr = activeIndex.split('-')
-    return activeIndexArr.slice(0, indexArr.length).join('-') === index
+    const levelIndex = activeIndexArr.slice(0, indexArr.length).join('-')
+    return levelIndex === index
   }
 
   checkExpand(activeIndex, expandIndex, index) {
+    const indexArr = index.split('-')
+    console.log('indexArr+++++', indexArr, expandIndex, index)
     return expandIndex.some((item) => {
-      const indexArr = index.split('-')
       const expandIndexArr = item.split('-')
       return expandIndexArr.slice(0, indexArr.length).join('-') === index
     })
+  }
+
+  componentDidMount() {
+    EventEmitter.on('$HiMenuSubMenuonClick', this.onClick)
   }
 
   renderPopperMenu(deepSubmenu, isExpand) {
@@ -83,6 +92,7 @@ class SubMenu extends Component {
     const isExpand = this.checkExpand(activeIndex, expandIndex, index)
     const isActive = this.checkActive(activeIndex, index)
     const deepSubmenu = index.split('-').length > 1
+
     const cls = classNames('hi-menu-item', `theme__${theme}`, 'hi-submenu', `hi-menu--${level}`, {
       'hi-menu-item--disabled': disabled,
       'hi-menu-item--active': isActive,

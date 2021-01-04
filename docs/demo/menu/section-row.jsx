@@ -96,7 +96,7 @@ class Demo extends React.Component {
       <div>
         <Menu
           placement="horizontal"
-          activeId={'xiaomi9'}
+          activeId={1}
           onClick={(id, prevId)=>console.log('-----click', id, prevId)}
           onClickSubMenu={index => console.log('-----onClickSubMenu', index)}
           data={datas}
@@ -105,7 +105,5 @@ class Demo extends React.Component {
     )
   }
 }`
-const DemoRow = () => (
-  <DocViewer code={code} desc={desc} scope={{ Menu }} prefix={prefix} />
-)
+const DemoRow = () => <DocViewer code={code} desc={desc} scope={{ Menu }} prefix={prefix} />
 export default DemoRow
