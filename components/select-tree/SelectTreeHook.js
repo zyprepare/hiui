@@ -422,7 +422,6 @@ const SelectTree = ({
   }
   // 搜索框的值改变时的事件
   const changeEvents = (val) => {
-    setSearchValue(val)
     if (dataSource && val.length) {
       setAutoload(true)
       onTrigger(val)
@@ -430,13 +429,12 @@ const SelectTree = ({
       searchTreeNode(val)
     }
   }
-  const debouncedFilterItems = _.debounce(changeEvents, 100)
+  const debouncedFilterItems = _.debounce(changeEvents, 300)
 
   const searchable = searchMode === 'filter' || searchMode === 'highlight'
   // 按键操作
   const handleKeyDown = useCallback(
     (evt) => {
-      evt.stopPropagation()
       // space
       if (
         evt.keyCode === 32 &&
@@ -444,36 +442,48 @@ const SelectTree = ({
         !show
       ) {
         evt.preventDefault()
+        evt.stopPropagation()
         setShow(true)
       }
       // esc
       if (evt.keyCode === 27) {
+        evt.stopPropagation()
+
         setShow(false)
       }
       if (show) {
         // down
         if (evt.keyCode === 40) {
+          evt.stopPropagation()
           evt.preventDefault()
           setActiveId(moveFocusedIndex('down', activeId, selectTreeRoot))
         }
         // up
         if (evt.keyCode === 38) {
           evt.preventDefault()
+          evt.stopPropagation()
+
           setActiveId(moveFocusedIndex('up', activeId, selectTreeRoot))
         }
         // right
         if (evt.keyCode === 39) {
           evt.preventDefault()
+          evt.stopPropagation()
+
           rightHandle({ activeId, flattenData, expandIds, expandEvents, setActiveId, mode })
         }
         // left
         if (evt.keyCode === 37) {
           evt.preventDefault()
+          evt.stopPropagation()
+
           leftHandle({ activeId, flattenData, expandIds, expandEvents, setActiveId, mode })
         }
         // space 选中
         if (evt.keyCode === 32 && !document.activeElement.classList.value.includes('hi-selecttree__searchinput')) {
           evt.preventDefault()
+          evt.stopPropagation()
+
           if (mode !== 'breadcrumb') {
             type === 'multiple'
               ? checkedEvents(
@@ -545,14 +555,15 @@ const SelectTree = ({
                       className="hi-selecttree__searchinput"
                       placeholder={localeDatas.selectTree.search}
                       clearable="true"
-                      value={searchValue}
                       clearabletrigger="always"
+                      value={searchValue}
                       onKeyDown={(e) => {
                         if (e.keyCode === '13') {
                           searchTreeNode(e.target.value)
                         }
                       }}
                       onChange={(e) => {
+                        setSearchValue(e.target.value)
                         debouncedFilterItems(e.target.value)
                       }}
                     />
