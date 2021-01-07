@@ -20,6 +20,10 @@ class EventEmitter {
   }
 
   removeAll(type) {
+    this.event[type] = null
+  }
+
+  remove(type) {
     this.event = {}
   }
 }

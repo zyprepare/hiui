@@ -26,6 +26,12 @@ class Menu extends Component {
       collapsed
     }
     this.clickInsideFlag = false // click在menu标识
+    this.isExpand = false
+  }
+
+  // 设置菜单弹层显示状态
+  setIsExpand = (isExpand) => {
+    this.isExpand = isExpand
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,7 +65,6 @@ class Menu extends Component {
   }
 
   clickOutside = () => {
-    console.log('1')
     if (!this.clickInsideFlag && !this.isNoMiniVertaicalMenu()) {
       this.setState({
         expandIndex: []
@@ -178,9 +183,7 @@ class Menu extends Component {
   }
 
   onClickSubMenu(index) {
-    console.log('2')
     const expandIndex = this.getExpandIndex(index)
-    console.log('sss', _.cloneDeep(expandIndex))
     this.clickInside()
     this.setState(
       {
@@ -195,21 +198,16 @@ class Menu extends Component {
   // 按键操作
   handleKeyDown = (evt) => {
     evt.stopPropagation()
-    // up
-    if (evt.keyCode === 38) {
-      evt.preventDefault()
-      // moveFocusedIndex('up')
-    }
+    if (this.isExpand) return
+    // // up
+    // if (evt.keyCode === 38) {
+    //   evt.preventDefault()
+    //   // moveFocusedIndex('up')
+    // }
     // down
-    if (evt.keyCode === 40) {
-      evt.preventDefault()
-      // moveFocusedIndex('down')
-    }
-    // right
-    if (evt.keyCode === 39) {
+    if (evt.keyCode === 40 || evt.keyCode === 38) {
       evt.preventDefault()
       const { data } = this.props
-      console.log('this.state.activeIndex ', this.state.activeIndex)
       let { activeIndex } = this.state
       if (isNaN(Number(activeIndex))) {
         activeIndex = activeIndex.split('-')[0]
@@ -218,9 +216,7 @@ class Menu extends Component {
         let levelIndex = 0
         let noLegalNode = false
         const childs = data[activeIndex].children
-        EventEmitter.emit('$HiMenuSubMenuonClick', activeIndex)
-        this.clickOutside()
-
+        this.onClickSubMenu(activeIndex)
         while (childs[levelIndex] && childs[levelIndex].disabled && !noLegalNode) {
           ++levelIndex
           if (levelIndex >= childs.length) {
@@ -230,14 +226,20 @@ class Menu extends Component {
         this.setState({
           activeIndex: activeIndex + '-' + levelIndex
         })
-      } else {
-        this.setState({
-          activeIndex: String(activeIndex / 1 + 1)
-        })
       }
     }
+    // right
+    if (evt.keyCode === 39) {
+      evt.preventDefault()
+      let { activeIndex } = this.state
+      if (isNaN(Number(activeIndex))) {
+        activeIndex = activeIndex.split('-')[0]
+      }
+      this.setState({
+        activeIndex: String(activeIndex / 1 + 1)
+      })
+    }
     // left
-    console.log('activeIndex', this.state.activeIndex)
     if (evt.keyCode === 37) {
       evt.preventDefault()
       // this.setState({
@@ -337,6 +339,7 @@ class Menu extends Component {
             datas={item.children}
             mode={placement}
             mini={collapsed}
+            setIsExpand={this.setIsExpand}
           />
         )
       } else {

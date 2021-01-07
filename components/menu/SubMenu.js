@@ -8,7 +8,6 @@ import EventEmitter from '../_util/EventEmitter'
 
 class SubMenu extends Component {
   onClick = (index) => {
-    console.log('index', index)
     this.props.onClick(index)
   }
 
@@ -21,7 +20,6 @@ class SubMenu extends Component {
 
   checkExpand(activeIndex, expandIndex, index) {
     const indexArr = index.split('-')
-    console.log('indexArr+++++', indexArr, expandIndex, index)
     return expandIndex.some((item) => {
       const expandIndexArr = item.split('-')
       return expandIndexArr.slice(0, indexArr.length).join('-') === index
@@ -32,13 +30,48 @@ class SubMenu extends Component {
     EventEmitter.on('$HiMenuSubMenuonClick', this.onClick)
   }
 
+  componentWillUnmount() {
+    EventEmitter.remove('$HiMenuSubMenuonClick')
+  }
+
+  // 按键操作
+  handleKeyDown = (evt) => {
+    evt.stopPropagation()
+    // up
+    if (evt.keyCode === 38) {
+      evt.preventDefault()
+    }
+    // down
+    if (evt.keyCode === 40) {
+      evt.preventDefault()
+      console.log('activeIndex', this.props.activeIndex)
+    }
+    // right
+    if (evt.keyCode === 39) {
+      evt.preventDefault()
+    }
+    // left
+    if (evt.keyCode === 37) {
+      evt.preventDefault()
+    }
+    // enter
+    if (evt.keyCode === 13) {
+    }
+    // esc
+    if (evt.keyCode === 27) {
+    }
+    // space
+    if (evt.keyCode === 32) {
+      evt.preventDefault()
+    }
+  }
+
   renderPopperMenu(deepSubmenu, isExpand) {
     const { mini, datas, index, renderMenu, fatMenu, clickInside, theme, overlayClassName } = this.props
     let leftGap
     let topGap
     let placement
     if (deepSubmenu || mini) {
-      // leftGap = mini && !deepSubmenu ? 0 : 16 // 非mini状态有个16px的right-padding，所以要补偿一下
       leftGap = 0
       topGap = -4
       placement = 'right-start'
@@ -55,6 +88,7 @@ class SubMenu extends Component {
         zIndex={1050}
         topGap={topGap}
         leftGap={leftGap}
+        onKeyDown={this.handleKeyDown}
         overlayClassName={overlayClassName}
         className={classNames('hi-submenu__popper', `theme__${theme}`, {
           'hi-submenu__popper--fat': fatMenu
@@ -88,11 +122,25 @@ class SubMenu extends Component {
   }
 
   render() {
-    const { content, icon, mode, mini, level, index, activeIndex, expandIndex, disabled, fatMenu, theme } = this.props
+    const {
+      content,
+      icon,
+      mode,
+      mini,
+      level,
+      index,
+      activeIndex,
+      expandIndex,
+      disabled,
+      fatMenu,
+      theme,
+      setIsExpand
+    } = this.props
     const isExpand = this.checkExpand(activeIndex, expandIndex, index)
     const isActive = this.checkActive(activeIndex, index)
     const deepSubmenu = index.split('-').length > 1
-
+    // 判断第一层展开状态
+    level === 1 && setIsExpand(isExpand)
     const cls = classNames('hi-menu-item', `theme__${theme}`, 'hi-submenu', `hi-menu--${level}`, {
       'hi-menu-item--disabled': disabled,
       'hi-menu-item--active': isActive,
@@ -117,7 +165,10 @@ class SubMenu extends Component {
       >
         <div
           className={`theme__${theme} hi-submenu__title hi-menu__title`}
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation()
+            console.log('1')
+
             !disabled && this.onClick(index)
           }}
         >

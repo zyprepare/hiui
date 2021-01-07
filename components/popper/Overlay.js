@@ -148,7 +148,7 @@ const Overlay = (props) => {
   const width = offset.width
   const left = offset.left + 'px'
   const top = offset.top + 'px'
-
+  console.log('doddd', document.activeElement)
   return (
     <div
       ref={popperContainerRef}
