@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import _ from 'lodash'
 import PopperJS from './utils/popper'
 import { getOffset } from './utils/positionUtils'
 import useClickOutside from './utils/useClickOutside'
@@ -148,7 +147,6 @@ const Overlay = (props) => {
   const width = offset.width
   const left = offset.left + 'px'
   const top = offset.top + 'px'
-  console.log('doddd', document.activeElement)
   return (
     <div
       ref={popperContainerRef}

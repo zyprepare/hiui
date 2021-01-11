@@ -17,7 +17,8 @@ class Item extends Component {
       icon,
       index,
       data,
-      mini
+      mini,
+      updateStatusContant
     } = this.props
     const isFocus = activeIndex === index
     const isActive = activeId === id
@@ -26,6 +27,7 @@ class Item extends Component {
       'hi-menu-item--active': isActive,
       'hi-menu-item--focus': isFocus
     })
+    updateStatusContant({ activePopperLevel: level })
     return (
       <li
         className={cls}

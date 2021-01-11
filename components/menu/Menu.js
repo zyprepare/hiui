@@ -3,7 +3,6 @@ import _ from 'lodash'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import EventEmitter from '../_util/EventEmitter'
 import Title from './Title'
 import Item from './Item'
 import SubMenu from './SubMenu'
@@ -26,14 +25,18 @@ class Menu extends Component {
       collapsed
     }
     this.clickInsideFlag = false // click在menu标识
-    this.isExpand = false
+    this.statusContant = {
+      isExpand: false,
+      activePopperLevel: 1
+    }
   }
 
   // 设置菜单弹层显示状态
-  setIsExpand = (isExpand) => {
-    this.isExpand = isExpand
+  updateStatusContant = (item) => {
+    this.statusContant = Object.assign({ ...item }, { ...this.statusContant })
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillReceiveProps(nextProps) {
     const { activeId, data, collapsed } = nextProps
     if (activeId !== this.props.activeId || !_.isEqual(data, this.props.data)) {
@@ -183,6 +186,7 @@ class Menu extends Component {
   }
 
   onClickSubMenu(index) {
+    console.log('index', index)
     const expandIndex = this.getExpandIndex(index)
     this.clickInside()
     this.setState(
@@ -198,7 +202,6 @@ class Menu extends Component {
   // 按键操作
   handleKeyDown = (evt) => {
     evt.stopPropagation()
-    if (this.isExpand) return
     // // up
     // if (evt.keyCode === 38) {
     //   evt.preventDefault()
@@ -208,14 +211,16 @@ class Menu extends Component {
     if (evt.keyCode === 40 || evt.keyCode === 38) {
       evt.preventDefault()
       const { data } = this.props
-      let { activeIndex } = this.state
-      if (isNaN(Number(activeIndex))) {
-        activeIndex = activeIndex.split('-')[0]
+      const { activeIndex } = this.state
+      let _activeIndex = activeIndex
+      console.log('activeIndex', activeIndex)
+      if (isNaN(Number(_activeIndex))) {
+        _activeIndex = _activeIndex.split('-')[0]
       }
-      if (data && data[activeIndex].children) {
+      if (data && data[_activeIndex].children) {
         let levelIndex = 0
         let noLegalNode = false
-        const childs = data[activeIndex].children
+        const childs = data[_activeIndex].children
         this.onClickSubMenu(activeIndex)
         while (childs[levelIndex] && childs[levelIndex].disabled && !noLegalNode) {
           ++levelIndex
@@ -283,7 +288,11 @@ class Menu extends Component {
       props
     )
 
-    return <Item {...mergeProps}>{data.content}</Item>
+    return (
+      <Item {...mergeProps} updateStatusContant={this.updateStatusContant}>
+        {data.content}
+      </Item>
+    )
   }
 
   renderFatSubMenu(data, parentIndex) {
@@ -317,7 +326,7 @@ class Menu extends Component {
     data.forEach((item, index) => {
       const indexStr = parentIndex !== '' ? parentIndex + '-' + index : '' + index
       const level = indexStr.split('-').length
-
+      this.updateStatusContant({ activePopperLevel: level })
       if (item.children) {
         items.push(
           <SubMenu
@@ -339,7 +348,7 @@ class Menu extends Component {
             datas={item.children}
             mode={placement}
             mini={collapsed}
-            setIsExpand={this.setIsExpand}
+            updateStatusContant={this.updateStatusContant}
           />
         )
       } else {
@@ -357,7 +366,6 @@ class Menu extends Component {
       'hi-menu--mini': collapsed
     })
     const miniIcon = <i className={`hi-icon icon-${collapsed ? 'Expand' : 'Collapse'}`} />
-
     return (
       <div className={cls} onKeyDown={this.handleKeyDown} tabIndex="0">
         <ul className="hi-menu-items">{this.renderMenu(data)}</ul>

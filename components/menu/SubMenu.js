@@ -34,38 +34,6 @@ class SubMenu extends Component {
     EventEmitter.remove('$HiMenuSubMenuonClick')
   }
 
-  // 按键操作
-  handleKeyDown = (evt) => {
-    evt.stopPropagation()
-    // up
-    if (evt.keyCode === 38) {
-      evt.preventDefault()
-    }
-    // down
-    if (evt.keyCode === 40) {
-      evt.preventDefault()
-      console.log('activeIndex', this.props.activeIndex)
-    }
-    // right
-    if (evt.keyCode === 39) {
-      evt.preventDefault()
-    }
-    // left
-    if (evt.keyCode === 37) {
-      evt.preventDefault()
-    }
-    // enter
-    if (evt.keyCode === 13) {
-    }
-    // esc
-    if (evt.keyCode === 27) {
-    }
-    // space
-    if (evt.keyCode === 32) {
-      evt.preventDefault()
-    }
-  }
-
   renderPopperMenu(deepSubmenu, isExpand) {
     const { mini, datas, index, renderMenu, fatMenu, clickInside, theme, overlayClassName } = this.props
     let leftGap
@@ -88,7 +56,6 @@ class SubMenu extends Component {
         zIndex={1050}
         topGap={topGap}
         leftGap={leftGap}
-        onKeyDown={this.handleKeyDown}
         overlayClassName={overlayClassName}
         className={classNames('hi-submenu__popper', `theme__${theme}`, {
           'hi-submenu__popper--fat': fatMenu
@@ -134,13 +101,13 @@ class SubMenu extends Component {
       disabled,
       fatMenu,
       theme,
-      setIsExpand
+      updateStatusContant
     } = this.props
     const isExpand = this.checkExpand(activeIndex, expandIndex, index)
     const isActive = this.checkActive(activeIndex, index)
     const deepSubmenu = index.split('-').length > 1
     // 判断第一层展开状态
-    level === 1 && setIsExpand(isExpand)
+    level === 1 && updateStatusContant({ isExpand })
     const cls = classNames('hi-menu-item', `theme__${theme}`, 'hi-submenu', `hi-menu--${level}`, {
       'hi-menu-item--disabled': disabled,
       'hi-menu-item--active': isActive,
@@ -167,8 +134,6 @@ class SubMenu extends Component {
           className={`theme__${theme} hi-submenu__title hi-menu__title`}
           onClick={(e) => {
             e.stopPropagation()
-            console.log('1')
-
             !disabled && this.onClick(index)
           }}
         >
