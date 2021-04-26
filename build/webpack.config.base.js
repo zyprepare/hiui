@@ -52,14 +52,14 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: './static/img/[name].[ext]?[hash]'
+          name: '/static/img/[name].[ext]?[hash]'
         }
       },
       {
         test: /\.(eot|ttf|woff|woff2|otf)/,
         loader: 'file-loader',
         options: {
-          name: './static/fonts/[name].[ext]?[hash]'
+          name: '/static/fonts/[name].[ext]?[hash]'
         }
       },
       {
