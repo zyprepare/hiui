@@ -40,7 +40,11 @@ interface ItemProps {
   required?: boolean
   showColon?: boolean
   style?: CSSProperties
+<<<<<<< HEAD
   className?: string
+=======
+  className?: string | object
+>>>>>>> feature/#1808
 }
 interface SchemaItem extends ItemProps {
   component?: string | JSX.Element
@@ -72,6 +76,7 @@ declare class SchemaForm extends React.Component<SchemaProps, any> {
 declare class Form extends React.Component<FormProps, any> {
   static Item = Item
   static SchemaForm = SchemaForm
+  static List = FormList
   static Reset = FormReset
   static Submit = FormSubmit
 }

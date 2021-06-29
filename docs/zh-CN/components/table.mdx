@@ -49,6 +49,12 @@ import DemoAsync from '../../demo/table/section-async.jsx'
 
 <DemoAsync />
 
+## 在线编辑表格
+
+import DemoEditor from '../../demo/table/section-editor.jsx'
+
+<DemoEditor />
+
 ## Props
 
 | 属性名             | 描述                                                                                                    | 类型                                           | 可选值                                    | 默认值     |
@@ -116,7 +122,7 @@ import DemoAsync from '../../demo/table/section-async.jsx'
 | total    | 该列是否支持合计       | boolean                                                                          | -                 | false  |
 | width    | 该列宽度               | number                                                                           | -                 | -      |
 | children | 多级表头               | ColumnItem[]                                                                     | -                 | -      |
-| render   | 控制单元格自定义渲染   | (text: DataItem[ColumnItem[dataKey]], row: DataItem, index: number) => ReactNode | -                 | -      |
+| render   | 控制单元格自定义渲染   | (text: DataItem[ColumnItem[dataKey]], row: DataItem, index: number, dataKey: string) => ReactNode | -                 | -      |
 
 ### DataSource
 

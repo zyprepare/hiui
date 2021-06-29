@@ -2,14 +2,17 @@ import React from 'react'
 import { Editor } from 'react-live'
 import Icon from '../../../components/icon'
 import Tooltip from '../../../components/tooltip'
+import UpdateInfo from './updateInfo'
 import Clipboard from 'clipboard'
 export default class EditorWrapper extends React.Component {
   state = {
     collapse: false,
     copyed: false,
     innerHeight: 0,
-    descBarHeight: 40
+    descBarHeight: 40,
+    visible: false
   }
+
   componentDidMount() {
     const descBar = document.getElementsByClassName(`${this.props.prefix}-desc-bar`)[0]
     this.setState({ descBarHeight: descBar.clientHeight })
@@ -24,21 +27,25 @@ export default class EditorWrapper extends React.Component {
       e.clearSelection()
     })
   }
+
   onCodeChange = (code) => {
     this.props.live.onChange(code)
     this.setInnerHeight()
   }
+
   setInnerHeight = () => {
     const codeViewer = document.getElementsByClassName(`${this.props.prefix}-editor-inner`)[0]
     this.setState({
       innerHeight: codeViewer.clientHeight
     })
   }
+
   componentDidUpdate(prevProps) {
     if (prevProps.live.code !== this.props.live.code) {
       this.setInnerHeight()
     }
   }
+
   resetCopy = () => {
     setTimeout(() => {
       this.setState({
@@ -46,6 +53,7 @@ export default class EditorWrapper extends React.Component {
       })
     }, 2000)
   }
+
   render() {
     const { copyed, innerHeight, descBarHeight } = this.state
     const {
@@ -55,7 +63,7 @@ export default class EditorWrapper extends React.Component {
     } = this.props
     return (
       <div
-        className='editor-wrapper'
+        className="editor-wrapper"
         style={{
           height: this.state.collapse ? innerHeight + descBarHeight : descBarHeight,
           overflow: 'hidden'
@@ -76,6 +84,19 @@ export default class EditorWrapper extends React.Component {
             {Array.isArray(desc) ? desc.map((d, index) => <div key={index}>{d}</div>) : desc}
           </div>
           <div>
+            <UpdateInfo visible={true}></UpdateInfo>
+            <Tooltip title="提交示例" style={{ margin: '0 8px', cursor: 'pointer' }}>
+              <span
+                onClick={() => {
+                  console.log('code')
+                  this.setState({
+                    visible: true
+                  })
+                }}
+              >
+                <Icon name="cloud-upload" />
+              </span>
+            </Tooltip>
             <Tooltip
               title={this.state.collapse ? '收起代码' : '展开代码'}
               style={{ margin: '0 8px', cursor: 'pointer' }}
@@ -87,32 +108,32 @@ export default class EditorWrapper extends React.Component {
                   })
                 }}
               >
-                {this.state.collapse ? <Icon name='show-code' /> : <Icon name='close-code' />}
+                {this.state.collapse ? <Icon name="show-code" /> : <Icon name="close-code" />}
               </span>
             </Tooltip>
             {copyed ? (
-              <Tooltip title='复制成功' style={{ margin: '0 8px', cursor: 'pointer' }}>
+              <Tooltip title="复制成功" style={{ margin: '0 8px', cursor: 'pointer' }}>
                 <span>
-                  <Icon name='check' />
+                  <Icon name="check" />
                 </span>
               </Tooltip>
             ) : (
-              <Tooltip title='复制代码' style={{ margin: '0 8px', cursor: 'pointer' }}>
+              <Tooltip title="复制代码" style={{ margin: '0 8px', cursor: 'pointer' }}>
                 <span
                   className={`${this.props.prefix}-copy-btn`}
                   data-clipboard-target={`.${prefix}-editor-inner .npm__react-simple-code-editor__textarea`}
                 >
-                  <Icon name='copy' />
+                  <Icon name="copy" />
                 </span>
               </Tooltip>
             )}
-            <Tooltip title='重置代码' style={{ margin: '0 8px', cursor: 'pointer' }}>
+            <Tooltip title="重置代码" style={{ margin: '0 8px', cursor: 'pointer' }}>
               <span
                 onClick={() => {
                   this.editor.updateContent(code)
                 }}
               >
-                <Icon name='reload' />
+                <Icon name="reload" />
               </span>
             </Tooltip>
           </div>
