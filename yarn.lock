@@ -17495,70 +17495,47 @@ tunnel-agent@^0.6.0:
   dependencies:
     safe-buffer "^5.0.1"
 
-turbo-darwin-64@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-darwin-64/-/turbo-darwin-64-1.1.5.tgz#7800af2d0a20df5ff674a8a6fb96d32957d11f48"
+turbo-darwin-64@1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npmmirror.com/turbo-darwin-64/-/turbo-darwin-64-1.5.6.tgz#2e0e14343c84dde33b5a09ea5389ee6a9565779c"
+  integrity sha512-CWdXMwenBS2+QXIR2Czx7JPnAcoMzWx/QwTDcHVxZyeayMHgz8Oq5AHCtfaHDSfV8YhD3xa0GLSk6+cFt+W8BQ==
 
-turbo-darwin-arm64@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-darwin-arm64/-/turbo-darwin-arm64-1.1.5.tgz#d70a9b791c1d2a930f1ac49fdf4ab6728b19fa7b"
+turbo-darwin-arm64@1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npmmirror.com/turbo-darwin-arm64/-/turbo-darwin-arm64-1.5.6.tgz#bed2bba126d53d7bbfd45f95e239fc43fd5bccbf"
+  integrity sha512-c/aXgW9JuXT2bJSKf01pdSDQKnrdcdj3WFKmKiVldb9We6eqFzI0fLHBK97k5LM/OesmRMfCMQ2Cv2DU8RqBAA==
 
-turbo-freebsd-64@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-freebsd-64/-/turbo-freebsd-64-1.1.5.tgz#39808f38d6af1400dd3bad0531c18444d9df9eab"
+turbo-linux-64@1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npmmirror.com/turbo-linux-64/-/turbo-linux-64-1.5.6.tgz#e7ddaf7a87084dfdd9c6d79efb41084d75439b31"
+  integrity sha512-y/jNF7SG+XJEwk2GxIqy3g4dj/a0PgZKDGyOkp24qp4KBRcHBl6dI1ZEfNed30EhEqmW4F5Dr7IpeCZoqgbrMg==
 
-turbo-freebsd-arm64@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-freebsd-arm64/-/turbo-freebsd-arm64-1.1.5.tgz#91b3b71b7a34d9845179cc8d6bdc5c28de252885"
+turbo-linux-arm64@1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npmmirror.com/turbo-linux-arm64/-/turbo-linux-arm64-1.5.6.tgz#6445f00f84e0f356a6a369ba2d75ede43aaeb796"
+  integrity sha512-FRcxPtW7eFrbR3QaYBVX8cK7i+2Cerqi6F0t5ulcq+d1OGSdSW3l35rPPyJdwCzCy+k/S9sBcyCV0RtbS6RKCQ==
 
-turbo-linux-32@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-linux-32/-/turbo-linux-32-1.1.5.tgz#9fc0970d2aa20871e9541f3d7d228c5c81b4b853"
+turbo-windows-64@1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npmmirror.com/turbo-windows-64/-/turbo-windows-64-1.5.6.tgz#3638d5297319157031e4dc906dbae53a1db8562c"
+  integrity sha512-/5KIExY7zbrbeL5fhKGuO85u5VtJ3Ue4kI0MbYCNnTGe7a10yTYkwswgtGihsgEF4AW0Nm0159aHmXZS2Le8IA==
 
-turbo-linux-64@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-linux-64/-/turbo-linux-64-1.1.5.tgz#2bb481bf0634b4ad578752cfb6f81fbbc2794568"
+turbo-windows-arm64@1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npmmirror.com/turbo-windows-arm64/-/turbo-windows-arm64-1.5.6.tgz#9eff9d13721be0b905b0aad07667507380f738fe"
+  integrity sha512-p+LQN9O39+rZuOAyc6BzyVGvdEKo+v+XmtdeyZsZpfj4xuOLtsEptW1w6cUD439u0YcPknuccGq1MQ0lXQ6Xuw==
 
-turbo-linux-arm64@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-linux-arm64/-/turbo-linux-arm64-1.1.5.tgz#bb4ad4ba101d72363d6b191c8a6f4de84631aeea"
-
-turbo-linux-arm@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-linux-arm/-/turbo-linux-arm-1.1.5.tgz#ba321a3b6086a0e633cff41c1a1312245240abe9"
-
-turbo-linux-mips64le@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-linux-mips64le/-/turbo-linux-mips64le-1.1.5.tgz#70f544e38317a536170636dfef1f68e9ebae7746"
-
-turbo-linux-ppc64le@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-linux-ppc64le/-/turbo-linux-ppc64le-1.1.5.tgz#2a6c8bda8a61d1c09a7bb95942a285c4f6cf9cba"
-
-turbo-windows-32@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-windows-32/-/turbo-windows-32-1.1.5.tgz#3606e5b860e8d6c33f7dc6fa12ed7414d4862f20"
-
-turbo-windows-64@1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo-windows-64/-/turbo-windows-64-1.1.5.tgz#aeeef0d598b8d1c17170a676a29b2ff0839d0069"
-
-turbo@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/turbo/-/turbo-1.1.5.tgz#2ca8a1bcfd9de4c59feaff022672ffd2c4fbc4b4"
+turbo@^1.5.6:
+  version "1.5.6"
+  resolved "https://registry.npmmirror.com/turbo/-/turbo-1.5.6.tgz#7dac8db14b2452afa45c57c050ff19989d4ab074"
+  integrity sha512-xJO/fhiMo4lI62iGR9OgUfJTC9tnnuoMwNC52IfvvBDEPlA8RWGMS8SFpDVG9bNCXvVRrtUTNJXMe6pJWBiOTA==
   optionalDependencies:
-    turbo-darwin-64 "1.1.5"
-    turbo-darwin-arm64 "1.1.5"
-    turbo-freebsd-64 "1.1.5"
-    turbo-freebsd-arm64 "1.1.5"
-    turbo-linux-32 "1.1.5"
-    turbo-linux-64 "1.1.5"
-    turbo-linux-arm "1.1.5"
-    turbo-linux-arm64 "1.1.5"
-    turbo-linux-mips64le "1.1.5"
-    turbo-linux-ppc64le "1.1.5"
-    turbo-windows-32 "1.1.5"
-    turbo-windows-64 "1.1.5"
+    turbo-darwin-64 "1.5.6"
+    turbo-darwin-arm64 "1.5.6"
+    turbo-linux-64 "1.5.6"
+    turbo-linux-arm64 "1.5.6"
+    turbo-windows-64 "1.5.6"
+    turbo-windows-arm64 "1.5.6"
 
 tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
