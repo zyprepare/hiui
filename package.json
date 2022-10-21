@@ -8,14 +8,8 @@
       "packages/hooks/*",
       "packages/core/*",
       "packages/icons/*",
-      "packages/motions/*",
       "packages/patches/*",
-      "packages/*",
-      "scripts/*",
-      "docs/*",
-      "plugins/*",
-      "website/*",
-      "examples/*"
+      "scripts/*"
     ]
   },
   "scripts": {
@@ -34,6 +28,8 @@
     "eslint": "eslint --fix ./packages/**/*.tsx",
     "precommit": "lint-staged",
     "test": "jest",
+    "cs": "changeset",
+    "v": "changeset version",
     "deploy": "gh-pages -t -d dist-github --git \"$(which git)\"",
     "pregenerate-docs": "yarn lerna run auto-generate --scope=@hi-ui/icons",
     "generate-docs": "yarn lerna run generate-docs --scope=@hi-ui/hi-docs"
@@ -41,6 +37,8 @@
   "devDependencies": {
     "@babel/cli": "^7.13.16",
     "@babel/preset-typescript": "~7.12.7",
+    "@changesets/changelog-github": "^0.4.7",
+    "@changesets/cli": "^2.25.0",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
