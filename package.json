@@ -30,6 +30,7 @@
     "test": "jest",
     "cs": "changeset",
     "v": "changeset version",
+    "publish": "changeset publish --registry=https://registry.npmjs.org/",
     "deploy": "gh-pages -t -d dist-github --git \"$(which git)\"",
     "pregenerate-docs": "yarn lerna run auto-generate --scope=@hi-ui/icons",
     "generate-docs": "yarn lerna run generate-docs --scope=@hi-ui/hi-docs"
