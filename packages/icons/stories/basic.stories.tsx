@@ -22,7 +22,7 @@ export const Basic = () => {
 
               { component: Icons.CloseCircleFilled, tagName: 'CloseCircleFilled' },
 
-              { component: Icons.CloseSquareFilled, tagName: 'CloseSquareFilled' },
+              { component: Icons.MinusSquareFilled, tagName: 'MinusSquareFilled' },
 
               { component: Icons.ExclamationCircleFilled, tagName: 'ExclamationCircleFilled' },
 
@@ -577,25 +577,15 @@ export const Basic = () => {
             title: '面型',
             children: [
               { component: Icons.CopyFilled, tagName: 'CopyFilled' },
-
               { component: Icons.DeleteFilled, tagName: 'DeleteFilled' },
-
               { component: Icons.DetailsFilled, tagName: 'DetailsFilled' },
-
               { component: Icons.DuplicateFilled, tagName: 'DuplicateFilled' },
-
               { component: Icons.EditFilled, tagName: 'EditFilled' },
-
               { component: Icons.EllipsisCircleFilled, tagName: 'EllipsisCircleFilled' },
-
               { component: Icons.EmptyFilled, tagName: 'EmptyFilled' },
-
               { component: Icons.FilterFilled, tagName: 'FilterFilled' },
-
               { component: Icons.FolderAddFilled, tagName: 'FolderAddFilled' },
-
               { component: Icons.FolderMoveFilled, tagName: 'FolderMoveFilled' },
-
               { component: Icons.PasteFilled, tagName: 'PasteFilled' },
             ],
           },
@@ -604,66 +594,52 @@ export const Basic = () => {
             title: '线型',
             children: [
               { component: Icons.AverageOutlined, tagName: 'AverageOutlined' },
-
               { component: Icons.ColumnHeightOutlined, tagName: 'ColumnHeightOutlined' },
-
               { component: Icons.ColumnsOutlined, tagName: 'ColumnsOutlined' },
-
               { component: Icons.CopyOutlined, tagName: 'CopyOutlined' },
-
               { component: Icons.DeleteOutlined, tagName: 'DeleteOutlined' },
-
               { component: Icons.DetailsOutlined, tagName: 'DetailsOutlined' },
-
               { component: Icons.DocumentSearchOutlined, tagName: 'DocumentSearchOutlined' },
-
               { component: Icons.DragOutlined, tagName: 'DragOutlined' },
-
               { component: Icons.DuplicateOutlined, tagName: 'DuplicateOutlined' },
-
               { component: Icons.EditOutlined, tagName: 'EditOutlined' },
-
               { component: Icons.EllipsisCircleOutlined, tagName: 'EllipsisCircleOutlined' },
-
-              { component: Icons.EllipsisVerticalOutlined, tagName: 'EllipsisVerticalOutlined' },
-
               { component: Icons.EllipsisOutlined, tagName: 'EllipsisOutlined' },
-
+              { component: Icons.EllipsisVerticalOutlined, tagName: 'EllipsisVerticalOutlined' },
               { component: Icons.EmptyOutlined, tagName: 'EmptyOutlined' },
-
               { component: Icons.EqualProportionOutlined, tagName: 'EqualProportionOutlined' },
-
               { component: Icons.FilterOutlined, tagName: 'FilterOutlined' },
-
               { component: Icons.FolderAddOutlined, tagName: 'FolderAddOutlined' },
-
               { component: Icons.FolderMoveOutlined, tagName: 'FolderMoveOutlined' },
-
               { component: Icons.FreezeColumnOutlined, tagName: 'FreezeColumnOutlined' },
-
               { component: Icons.FrozenLineOutlined, tagName: 'FrozenLineOutlined' },
-
               { component: Icons.PasteOutlined, tagName: 'PasteOutlined' },
-
               { component: Icons.RotateLeftOutlined, tagName: 'RotateLeftOutlined' },
-
               { component: Icons.RotateRightOutlined, tagName: 'RotateRightOutlined' },
-
               { component: Icons.SaveOutlined, tagName: 'SaveOutlined' },
-
               { component: Icons.ScissorOutlined, tagName: 'ScissorOutlined' },
-
               { component: Icons.SortAscendingOutlined, tagName: 'SortAscendingOutlined' },
-
               { component: Icons.SortDescendingOutlined, tagName: 'SortDescendingOutlined' },
-
               { component: Icons.SummationOutlined, tagName: 'SummationOutlined' },
-
               { component: Icons.TableOutlined, tagName: 'TableOutlined' },
-
               { component: Icons.ZoomInOutlined, tagName: 'ZoomInOutlined' },
-
               { component: Icons.ZoomOutOutlined, tagName: 'ZoomOutOutlined' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'data',
+        title: '数据',
+        children: [
+          {
+            id: 'outlined',
+            title: '',
+            children: [
+              { component: Icons.BarChartOutlined, tagName: 'BarChartOutlined' },
+              { component: Icons.LineChartOutlined, tagName: 'LineChartOutlined' },
+              { component: Icons.PieChartOutlined, tagName: 'PieChartOutlined' },
+              { component: Icons.StockChartOutlined, tagName: 'StockChartOutlined' },
             ],
           },
         ],

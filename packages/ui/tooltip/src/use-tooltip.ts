@@ -100,7 +100,9 @@ export const useTooltip = ({
     }
   }, [visible, popper, visibleAction, triggerElement])
 
-  const { shouldRenderPopper, getArrowProps, getPopperProps } = usePopper(usePopperProps)
+  const { shouldRenderPopper, getArrowProps, getPopperProps, update: updatePopper } = usePopper(
+    usePopperProps
+  )
 
   const tooltipId = useUID('popover')
 
@@ -174,6 +176,7 @@ export const useTooltip = ({
     getTriggerProps,
     getPopperProps,
     getArrowProps,
+    updatePopper,
     shouldRenderPopper,
   }
 }
@@ -207,6 +210,10 @@ export interface UseTooltipProps extends PopperOverlayProps {
    * 鼠标移出后隐藏延时，单位：毫秒
    */
   mouseLeaveDelay?: number
+  /**
+   * 设置基于 reference 元素的间隙偏移量
+   */
+  gutterGap?: number
 }
 
 export type UseTooltipReturn = ReturnType<typeof useTooltip>

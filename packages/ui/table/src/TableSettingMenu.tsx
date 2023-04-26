@@ -32,6 +32,8 @@ export const TableSettingMenu = forwardRef<HTMLDivElement | null, TableColumnMen
       setHiddenColKeys,
       cacheHiddenColKeys,
       setCacheHiddenColKeys,
+      onSetColKeysChange,
+      checkDisabledColKeys = [],
     },
     ref
   ) => {
@@ -71,7 +73,9 @@ export const TableSettingMenu = forwardRef<HTMLDivElement | null, TableColumnMen
     const onConfirm = () => {
       // 触发 table 更新列显隐及排序
       setHiddenColKeys(cacheHiddenColKeys)
-      setSortColKeys(cacheSortedCols.map((col) => col.dataKey!))
+      const newSortKeys = cacheSortedCols.map((col) => col.dataKey!)
+      setSortColKeys(newSortKeys)
+      onSetColKeysChange && onSetColKeysChange(newSortKeys, cacheHiddenColKeys)
       menuVisibleAction.off()
     }
 
@@ -114,6 +118,7 @@ export const TableSettingMenu = forwardRef<HTMLDivElement | null, TableColumnMen
                   dropProps={dropProps}
                   cacheHiddenColKeys={cacheHiddenColKeys}
                   setCacheHiddenColKeys={setCacheHiddenColKeys}
+                  checkDisabled={checkDisabledColKeys.includes(col.dataKey)}
                 />
               )
             })}
@@ -129,6 +134,8 @@ export interface TableColumnMenuProps
     UseColSorterReturn,
     Omit<UseColHiddenReturn, 'visibleCols'> {
   prefixCls?: string
+  checkDisabledColKeys?: string[]
+  onSetColKeysChange?: (sortedColKeys: string[], hiddenColKeys: string[]) => void
 }
 
 if (__DEV__) {
@@ -142,6 +149,7 @@ function TableSettingMenuItem({
   setCacheHiddenColKeys,
   dropProps,
   index,
+  checkDisabled,
 }: any) {
   const { dataKey, title } = column
   const { dragging, direction, getDragTriggerProps, getDropTriggerProps } = useDrag({
@@ -164,6 +172,7 @@ function TableSettingMenuItem({
     >
       <div className={`${prefixCls}-item__wrap`}>
         <Checkbox
+          disabled={checkDisabled}
           checked={!cacheHiddenColKeys.includes(dataKey)}
           onChange={(evt) => {
             const shouldChecked = evt.target.checked

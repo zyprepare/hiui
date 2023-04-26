@@ -28,12 +28,15 @@ const DefaultValue = ['', ''] as TimePickerValue[]
 const DefaultDisabledFunc = () => []
 const DefaultPlaceholder = ['', '']
 
-const getValueMatchString = (value?: TimePickerValue[] | TimePickerValue) => {
+const getValueMatchString = (
+  value?: TimePickerValue[] | TimePickerValue,
+  format: TimePickerFormat = 'HH:mm:ss'
+) => {
   if (!value) {
     return undefined
   }
   const result = Array.isArray(value) ? value : [value]
-  return result.map((item) => (typeof item === 'string' ? item : DayJs(item).format('HH:mm:ss')))
+  return result.map((item) => (typeof item === 'string' ? item : DayJs(item).format(format)))
 }
 
 export const TimePicker = forwardRef<HTMLDivElement | null, TimePickerProps>(
@@ -71,11 +74,13 @@ export const TimePicker = forwardRef<HTMLDivElement | null, TimePickerProps>(
     const nowText = i18n.get('timePicker.now')
 
     const [attachEl, setAttachEl] = useState<HTMLElement | null>(null)
-    const formatUncontrolledValue = useMemo(() => getValueMatchString(uncontrolledValue)!, [
+    const formatUncontrolledValue = useMemo(() => getValueMatchString(uncontrolledValue, format)!, [
+      format,
       uncontrolledValue,
     ])
-    const formatControlledValue = useMemo(() => getValueMatchString(controlledValue), [
+    const formatControlledValue = useMemo(() => getValueMatchString(controlledValue, format), [
       controlledValue,
+      format,
     ])
     const formatNotifyOutside = useCallback(
       (disposeValue: string[]) => {
@@ -224,6 +229,7 @@ export const TimePicker = forwardRef<HTMLDivElement | null, TimePickerProps>(
               appearance="link"
               type="primary"
               onClick={() => {
+                onCacheChange([getNowString(format)])
                 onChange([getNowString(format)])
                 showPopperRef.current = false
                 setShowPopper(false)
@@ -235,17 +241,18 @@ export const TimePicker = forwardRef<HTMLDivElement | null, TimePickerProps>(
         </div>
       )
     }, [
-      confirmText,
-      nowText,
       prefixCls,
       isInputValid,
+      confirmText,
       type,
-      format,
+      isInSingleValueFormat,
+      nowText,
+      validChecker,
       cacheValue,
       value,
       onChange,
-      validChecker,
-      isInSingleValueFormat,
+      onCacheChange,
+      format,
     ])
 
     return (

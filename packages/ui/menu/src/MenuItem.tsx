@@ -52,6 +52,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
       clickSubMenu,
       closeAllPopper,
       activeParents,
+      overlayClassName,
     } = useContext(MenuContext)
 
     const _parentIds = (parentIds || []).concat(id)
@@ -182,6 +183,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
               attachEl={itemRef.current}
               placement={'right-start'}
               gutterGap={16}
+              className={overlayClassName}
               onClose={() => {
                 if (closePopper) {
                   closePopper(id)
@@ -189,9 +191,17 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
               }}
             >
               <ul className={`${prefixCls}-popmenu`}>
-                {children!.map((child) => (
-                  <MenuItem {...child} key={child.id} level={level + 1} parentIds={_parentIds} />
-                ))}
+                {children!.map((child) => {
+                  return (
+                    <MenuItem
+                      {...child}
+                      key={child.id}
+                      level={level + 1}
+                      parentIds={_parentIds}
+                      raw={child}
+                    />
+                  )
+                })}
               </ul>
             </Popper>
           ) : (
@@ -201,6 +211,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
               placement={'right-start'}
               gutterGap={16}
               disabledPortal
+              className={overlayClassName}
               onClose={() => {
                 if (closePopper) {
                   closePopper(id)
@@ -209,7 +220,13 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
             >
               <ul className={`${prefixCls}-popmenu`}>
                 {children!.map((child) => (
-                  <MenuItem {...child} key={child.id} level={level + 1} parentIds={_parentIds} />
+                  <MenuItem
+                    {...child}
+                    key={child.id}
+                    level={level + 1}
+                    parentIds={_parentIds}
+                    raw={child}
+                  />
                 ))}
               </ul>
             </Popper>
@@ -225,6 +242,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
               attachEl={itemRef.current}
               placement={'right-start'}
               gutterGap={16}
+              className={overlayClassName}
               onClose={() => {
                 if (closePopper) {
                   closePopper(id)
@@ -233,7 +251,13 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
             >
               <ul className={`${prefixCls}-popmenu`}>
                 {children!.map((child) => (
-                  <MenuItem {...child} key={child.id} level={level + 1} parentIds={_parentIds} />
+                  <MenuItem
+                    {...child}
+                    key={child.id}
+                    level={level + 1}
+                    parentIds={_parentIds}
+                    raw={child}
+                  />
                 ))}
               </ul>
             </Popper>
@@ -244,6 +268,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
               disabledPortal
               placement={'right-start'}
               gutterGap={16}
+              className={overlayClassName}
               onClose={() => {
                 if (closePopper) {
                   closePopper(id)
@@ -252,7 +277,13 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
             >
               <ul className={`${prefixCls}-popmenu`}>
                 {children!.map((child) => (
-                  <MenuItem {...child} key={child.id} level={level + 1} parentIds={_parentIds} />
+                  <MenuItem
+                    {...child}
+                    key={child.id}
+                    level={level + 1}
+                    parentIds={_parentIds}
+                    raw={child}
+                  />
                 ))}
               </ul>
             </Popper>
@@ -264,6 +295,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
             attachEl={itemRef.current}
             placement={'right-start'}
             gutterGap={16}
+            className={overlayClassName}
             onClose={() => {
               if (closePopper) {
                 closePopper(id)
@@ -313,6 +345,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
               attachEl={itemRef.current}
               placement={level === 1 ? 'bottom-start' : 'right-start'}
               gutterGap={level === 1 ? 8 : 16}
+              className={overlayClassName}
               onClose={() => {
                 if (closePopper) {
                   closePopper(id)
@@ -321,7 +354,13 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
             >
               <ul className={`${prefixCls}-popmenu`}>
                 {children!.map((child) => (
-                  <MenuItem {...child} key={child.id} level={level + 1} parentIds={_parentIds} />
+                  <MenuItem
+                    {...child}
+                    key={child.id}
+                    level={level + 1}
+                    parentIds={_parentIds}
+                    raw={child}
+                  />
                 ))}
               </ul>
             </Popper>
@@ -332,6 +371,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
               disabledPortal
               placement={level === 1 ? 'bottom-start' : 'right-start'}
               gutterGap={level === 1 ? 8 : 16}
+              className={overlayClassName}
               onClose={() => {
                 if (closePopper) {
                   closePopper(id)
@@ -340,7 +380,13 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
             >
               <ul className={`${prefixCls}-popmenu`}>
                 {children!.map((child) => (
-                  <MenuItem {...child} key={child.id} level={level + 1} parentIds={_parentIds} />
+                  <MenuItem
+                    {...child}
+                    key={child.id}
+                    level={level + 1}
+                    parentIds={_parentIds}
+                    raw={child}
+                  />
                 ))}
               </ul>
             </Popper>
@@ -352,6 +398,7 @@ export const MenuItem = forwardRef<HTMLLIElement | null, MenuItemProps>(
             attachEl={itemRef.current}
             placement={'bottom-start'}
             gutterGap={8}
+            className={overlayClassName}
             onClose={() => {
               if (closePopper) {
                 closePopper(id)

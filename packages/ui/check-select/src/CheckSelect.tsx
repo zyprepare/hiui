@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useMemo, useRef, useState } from 'react'
+import React, { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { cx, getPrefixCls } from '@hi-ui/classname'
 import { __DEV__ } from '@hi-ui/env'
 import { useCheckSelect, UseCheckSelectProps } from './use-check-select'
@@ -15,7 +15,7 @@ import { useLatestRef } from '@hi-ui/use-latest'
 import Checkbox from '@hi-ui/checkbox'
 import { TagInputMock } from '@hi-ui/tag-input'
 import { isFunction, isArrayNonEmpty, isUndef } from '@hi-ui/type-assertion'
-import VirtualList, { useCheckInVirtual } from '@hi-ui/virtual-list'
+import VirtualList, { ListRef, useCheckInVirtual } from '@hi-ui/virtual-list'
 import { Picker, PickerProps } from '@hi-ui/picker'
 
 import { times, uniqBy } from '@hi-ui/array-utils'
@@ -72,6 +72,7 @@ export const CheckSelect = forwardRef<HTMLDivElement | null, CheckSelectProps>(
       renderExtraFooter,
       onSearch: onSearchProp,
       fieldNames = DEFAULT_FIELD_NAMES,
+      customRender,
       ...rest
     },
     ref
@@ -237,6 +238,15 @@ export const CheckSelect = forwardRef<HTMLDivElement | null, CheckSelectProps>(
 
     const cls = cx(prefixCls, className, `${prefixCls}--${menuVisible ? 'open' : 'closed'}`)
 
+    const listRef = useRef<ListRef>(null)
+
+    useEffect(() => {
+      // 每次打开时触发一次滚动条显示
+      if (menuVisible) {
+        listRef.current?.scrollTo(undefined as any)
+      }
+    }, [menuVisible])
+
     return (
       <CheckSelectProvider value={context}>
         <Picker
@@ -250,74 +260,82 @@ export const CheckSelect = forwardRef<HTMLDivElement | null, CheckSelectProps>(
           searchable={searchable}
           scrollable={!inVirtual}
           onSearch={callAllFuncs(onSearchProp, onSearch)}
-          loading={loading}
+          loading={rest.loading !== undefined ? rest.loading : loading}
           footer={renderDefaultFooter()}
           trigger={
-            <TagInputMock
-              clearable={clearable}
-              placeholder={placeholder}
-              // @ts-ignore
-              displayRender={displayRender}
-              suffix={menuVisible ? <UpOutlined /> : <DownOutlined />}
-              focused={menuVisible}
-              appearance={appearance}
-              value={value}
-              // @ts-ignore
-              onChange={tryChangeValue}
-              data={mergedData}
-              invalid={invalid}
-              onClick={(evt) => {
-                if (!showOnlyShowChecked) return
-                if (disabled) return
+            customRender ? (
+              typeof customRender === 'function' ? (
+                customRender(checkedItems)
+              ) : (
+                customRender
+              )
+            ) : (
+              <TagInputMock
+                clearable={clearable}
+                placeholder={placeholder}
+                // @ts-ignore
+                displayRender={displayRender}
+                suffix={menuVisible ? <UpOutlined /> : <DownOutlined />}
+                focused={menuVisible}
+                appearance={appearance}
+                value={value}
+                // @ts-ignore
+                onChange={tryChangeValue}
+                data={mergedData}
+                invalid={invalid}
+                onClick={(evt) => {
+                  if (!showOnlyShowChecked) return
+                  if (disabled) return
 
-                // 阻止 Picker 调用 onOpen/onClose
-                evt.preventDefault()
+                  // 阻止 Picker 调用 onOpen/onClose
+                  evt.preventDefault()
 
-                if (filterItems) {
-                  setFilterItems(null)
-                }
-
-                if (menuVisible) {
-                  if (expandedViewRef.current === 'normal') {
-                    menuVisibleAction.off()
+                  if (filterItems) {
+                    setFilterItems(null)
                   }
-                } else {
-                  menuVisibleAction.on()
-                }
 
-                expandedViewRef.current = 'normal'
-              }}
-              expandable={showOnlyShowChecked}
-              activeExpandable={activeExpandable}
-              onExpand={(evt) => {
-                if (!showOnlyShowChecked) return
-                if (disabled) return
+                  if (menuVisible) {
+                    if (expandedViewRef.current === 'normal') {
+                      menuVisibleAction.off()
+                    }
+                  } else {
+                    menuVisibleAction.on()
+                  }
 
-                // 阻止冒泡触发外层 onClick
-                evt.stopPropagation()
-                evt.preventDefault()
+                  expandedViewRef.current = 'normal'
+                }}
+                expandable={showOnlyShowChecked}
+                activeExpandable={activeExpandable}
+                onExpand={(evt) => {
+                  if (!showOnlyShowChecked) return
+                  if (disabled) return
 
-                setFilterItems(() => {
-                  return mergedData.filter((item) => {
-                    return value.includes(item.id)
+                  // 阻止冒泡触发外层 onClick
+                  evt.stopPropagation()
+                  evt.preventDefault()
+
+                  setFilterItems(() => {
+                    return mergedData.filter((item) => {
+                      return value.includes(item.id)
+                    })
                   })
-                })
 
-                if (menuVisible) {
-                  if (expandedViewRef.current !== 'normal') {
-                    menuVisibleAction.off()
+                  if (menuVisible) {
+                    if (expandedViewRef.current !== 'normal') {
+                      menuVisibleAction.off()
+                    }
+                  } else {
+                    menuVisibleAction.on()
                   }
-                } else {
-                  menuVisibleAction.on()
-                }
 
-                expandedViewRef.current = 'onlyChecked'
-              }}
-            />
+                  expandedViewRef.current = 'onlyChecked'
+                }}
+              />
+            )
           }
         >
           {isArrayNonEmpty(dropdownItems) ? (
-            <VirtualList itemKey="id" fullHeight={false} {...virtualListProps}>
+            <VirtualList ref={listRef} itemKey="id" fullHeight={false} {...virtualListProps}>
               {(node: any) => {
                 /* 反向 map，搜索删选数据时会对数据进行处理 */
                 return 'groupTitle' in node ? (
@@ -429,6 +447,10 @@ export interface CheckSelectProps
    * 是否开启查看仅已选功能
    */
   showOnlyShowChecked?: boolean
+  /**
+   * 自定义渲染选中的内容
+   */
+  customRender?: React.ReactNode | ((option: CheckSelectItemEventData[]) => React.ReactNode)
 }
 
 // @ts-ignore

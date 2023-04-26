@@ -220,6 +220,7 @@ const Calendar = ({
         altCalendarPresetData,
         dateMarkPresetData,
       }) as FormatCalendarItem
+
       return (
         <React.Fragment>
           {fullTimeInfo.nodeMark && (
@@ -235,7 +236,7 @@ const Calendar = ({
               {fullTimeInfo.nodeMark}
             </div>
           )}
-          {fullTimeInfo.text ? (
+          {fullTimeInfo.text || fullTimeInfo.name ? (
             <span
               onMouseEnter={() => {
                 altCalendarPreset === 'id-ID' && showHolidayDetail(fullTimeInfo)
@@ -250,7 +251,8 @@ const Calendar = ({
                 fullTimeInfo.highlight ? `${prefixCls}__lunar--highlight` : ''
               }`}
             >
-              {fullTimeInfo.text}
+              {/* 如果是节气，使用 fullTimeInfo.name */}
+              {fullTimeInfo.name || fullTimeInfo.text}
             </span>
           ) : null}
         </React.Fragment>
@@ -261,7 +263,12 @@ const Calendar = ({
   }
 
   return (
-    <div className={`${prefixCls}__calendar-wrap`}>
+    <div
+      className={cx(
+        `${prefixCls}__calendar-wrap`,
+        `${prefixCls}__calendar-wrap--${isLarge ? 'lg' : 'md'}`
+      )}
+    >
       <CSSTransition in={holidayFullNameShow} timeout={300} classNames={`${prefixCls}__indiaHoli`}>
         <div className={`${prefixCls}__indiaHoli`}>
           <div className={`${prefixCls}__indiaHoli-text`}>{holidayFullName}</div>

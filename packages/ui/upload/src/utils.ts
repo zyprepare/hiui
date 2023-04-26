@@ -34,3 +34,43 @@ export const getFileType = (file: File) => {
   }
   return fileType
 }
+
+/**
+ * 获取处理后的文件列表
+ * @param fileList 原始文件列表
+ * @param accept 文件类型
+ * @returns
+ */
+export const getFileItems = (fileList: FileList | null, accept?: string) => {
+  if (!fileList) {
+    return []
+  }
+
+  const itemArr = []
+  const len = fileList.length
+
+  for (let i = 0; i < len; i++) {
+    const item = fileList[i]
+
+    if (!accept || (accept && accept.replace(/\s/g, '').split(',').includes(item.type))) {
+      itemArr[i] = item
+    }
+  }
+
+  return itemArr
+}
+
+/**
+ * 通过 filename 获取图片格式
+ * @param filename
+ * @returns
+ */
+export const getImageTypeByFilename = (filename: string) => {
+  let type = filename.substring(filename.lastIndexOf('.') + 1)
+
+  if (!type) type = 'png'
+
+  if (type === 'jpg') type = 'jpeg'
+
+  return `image/${type}`
+}

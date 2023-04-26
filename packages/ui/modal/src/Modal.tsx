@@ -31,6 +31,7 @@ const modalIconMap = {
   [ModalType.WARNING]: <ExclamationCircleFilled />,
   [ModalType.INFO]: <InfoCircleFilled />,
 }
+const defaultMaxHeight = 600
 
 /**
  * TODO: What is Modal
@@ -46,13 +47,15 @@ export const Modal = forwardRef<HTMLDivElement | null, ModalProps>(
       closeable = true,
       timeout = 300,
       type,
+      onEntered,
       onExited: onExitedProp,
       title,
       cancelText: cancelTextProp,
       confirmText: confirmTextProp,
       confirmLoading,
       footer,
-      onCancel: onCloseProp,
+      onClose,
+      onCancel,
       onConfirm,
       container,
       closeIcon = defaultCloseIcon,
@@ -77,7 +80,7 @@ export const Modal = forwardRef<HTMLDivElement | null, ModalProps>(
     const [transitionVisible, transitionVisibleAction] = useToggle(false)
     const [transitionExited, transitionExitedAction] = useToggle(true)
 
-    const onRequestCloseLatest = useLatestCallback(() => onCloseProp?.())
+    const onRequestCloseLatest = useLatestCallback(() => onCancel?.())
 
     const { rootProps, getModalProps, getModalWrapperProps } = useModal({
       ...rest,
@@ -127,6 +130,7 @@ export const Modal = forwardRef<HTMLDivElement | null, ModalProps>(
           in={transitionVisible}
           timeout={timeout}
           appear
+          onEntered={onEntered}
           onExited={onExited}
           mountOnEnter={!preload}
           unmountOnExit={unmountOnClose}
@@ -135,7 +139,11 @@ export const Modal = forwardRef<HTMLDivElement | null, ModalProps>(
             {showMask ? <div className={`${prefixCls}__overlay`} /> : null}
             <div
               className={`${prefixCls}__wrapper`}
-              style={{ width, height }}
+              style={{
+                width,
+                height,
+                ...(!height ? { maxHeight: defaultMaxHeight } : null),
+              }}
               {...getModalWrapperProps()}
             >
               {hasHeader ? (
@@ -154,7 +162,7 @@ export const Modal = forwardRef<HTMLDivElement | null, ModalProps>(
                     </div>
                   ) : null}
                   {closeable ? (
-                    <IconButton effect icon={closeIcon} onClick={onRequestCloseLatest} />
+                    <IconButton effect icon={closeIcon} onClick={onClose ?? onRequestCloseLatest} />
                   ) : null}
                 </header>
               ) : null}
@@ -295,6 +303,11 @@ export interface ModalProps extends HiBaseHTMLProps<'div'>, UseModalProps {
    * @private
    */
   onExited?: () => void
+  /**
+   * 打开动画显示时回调。暂不对外暴露
+   * @private
+   */
+  onEntered?: () => void
   /**
    * 确认框类型
    */
