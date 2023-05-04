@@ -13,7 +13,7 @@ export * from '@hi-ui/throttle-by-raf'
 
 function abc2() {
   let arr2 = []
-  if (arr2.length < 0) {
+  if (arr2.length === 0) {
     arr2 = [2, 3, Math.random() * 10]
   }
 }
