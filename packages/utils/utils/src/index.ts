@@ -17,10 +17,11 @@ function abc2() {
     arr2 = [2, 3, Math.random() * 10]
   }
 }
-
+console.log(a)
+b
 function abc3() {
-  let arr2 = []
-  if (arr2.length < 0) {
-    arr2 = [2, 3, Math.random() * 10]
+  let arr3 = []
+  if (arr3.length < 0) {
+    arr3 = [2, 3, Math.random() * 10]
   }
 }
