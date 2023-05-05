@@ -11,17 +11,9 @@ export * from '@hi-ui/type-assertion'
 export * from '@hi-ui/raf'
 export * from '@hi-ui/throttle-by-raf'
 
-function abc1() {
-  let arr1 = []
-  if (arr1.length === 0) {
-    arr1 = [2, 3, Math.random() * 10]
-  }
-}
-console.log(ab)
-bc
-function abc3() {
-  let arr3 = []
-  if (arr3.length < 0) {
-    arr3 = [2, 3, Math.random() * 10]
+function abc0() {
+  let arr0 = []
+  if (arr0.length === 0) {
+    arr0 = [2, 3, Math.random() * 10]
   }
 }
