@@ -11,10 +11,10 @@ export * from '@hi-ui/type-assertion'
 export * from '@hi-ui/raf'
 export * from '@hi-ui/throttle-by-raf'
 
-function abc1() {
-  let arr1 = []
-  if (arr1.length < 0) {
-    arr1 = [2, 3, Math.random() * 10]
+function abc2() {
+  let arr2 = []
+  if (arr2.length < 0) {
+    arr2 = [2, 3, Math.random() * 10]
   }
 }
-ab
+abc
