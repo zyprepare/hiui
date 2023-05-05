@@ -10,10 +10,3 @@ export * from '@hi-ui/tree-utils'
 export * from '@hi-ui/type-assertion'
 export * from '@hi-ui/raf'
 export * from '@hi-ui/throttle-by-raf'
-
-function abc0() {
-  let arr0 = []
-  if (arr0.length === 0) {
-    arr0 = [2, 3, Math.random() * 10]
-  }
-}
